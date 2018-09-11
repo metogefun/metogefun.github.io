@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[leancloud_config]]></title>
+    <title><![CDATA[Leancloud阅读统计]]></title>
     <url>%2F2018%2F09%2F11%2Fleancloud-config%2F</url>
     <content type="text"><![CDATA[昨天博客改版后，添加了文章阅读次数统计，但是每次点进去之后提示Counter not initialized! See more at console err msg。在网上找了很多办法，终于搞定了。 记录下该大神的方案]]></content>
       <tags>
