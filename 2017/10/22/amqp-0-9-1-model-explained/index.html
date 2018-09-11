@@ -109,25 +109,25 @@
 
 
   <meta name="description" content="本指南提供了AMQP 0-9-1协议的概述，该协议是RabbitMQ支持的协议之一。 AMQP 0-9-1AMQP 0-9-1(高级消息队列协议)是一种消息传递协议，它使符合标准的客户端应用程序能够与符合标准的消息传递中间件代理进行通信。 代理和他们的规则消息传递代理接收来自发布者的消息(发布它们的应用程序，也称为生产者)，并将它们发送给消费者(处理它们的应用程序)。 由于它是一种网络协议，发布者">
-<meta name="keywords" content="翻译,amqp">
+<meta name="keywords" content="翻译,amqp,rabbitmq">
 <meta property="og:type" content="article">
 <meta property="og:title" content="AMQP 0-9-1模型解释">
 <meta property="og:url" content="http://blog.finegames.cn/2017/10/22/amqp-0-9-1-model-explained/index.html">
 <meta property="og:site_name" content="王召辉">
 <meta property="og:description" content="本指南提供了AMQP 0-9-1协议的概述，该协议是RabbitMQ支持的协议之一。 AMQP 0-9-1AMQP 0-9-1(高级消息队列协议)是一种消息传递协议，它使符合标准的客户端应用程序能够与符合标准的消息传递中间件代理进行通信。 代理和他们的规则消息传递代理接收来自发布者的消息(发布它们的应用程序，也称为生产者)，并将它们发送给消费者(处理它们的应用程序)。 由于它是一种网络协议，发布者">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://blog.finegames.cn/2017/10/22/amqp-0-9-1-model-explained/amqp-0-9-1-model-explained/hello-world-example-routing.png">
-<meta property="og:image" content="https://www.rabbitmq.com/img/tutorials/intro/exchange-direct.png">
-<meta property="og:image" content="https://www.rabbitmq.com/img/tutorials/intro/exchange-fanout.png">
-<meta property="og:image" content="https://www.rabbitmq.com/img/tutorials/intro/exchange-declare.png">
-<meta property="og:image" content="https://www.rabbitmq.com/img/tutorials/intro/exchange-declare-ok.png">
-<meta property="og:image" content="https://www.rabbitmq.com/img/tutorials/intro/queue-declare.png">
-<meta property="og:image" content="https://www.rabbitmq.com/img/tutorials/intro/queue-declare-ok.png">
-<meta property="og:updated_time" content="2018-09-10T12:05:16.096Z">
+<meta property="og:image" content="http://blog.finegames.cn/2017/10/22/amqp-0-9-1-model-explained/hello-world-example-routing.png">
+<meta property="og:image" content="http://blog.finegames.cn/2017/10/22/amqp-0-9-1-model-explained/exchange-direct.png">
+<meta property="og:image" content="http://blog.finegames.cn/2017/10/22/amqp-0-9-1-model-explained/exchange-fanout.png">
+<meta property="og:image" content="http://blog.finegames.cn/2017/10/22/amqp-0-9-1-model-explained/exchange-declare.png">
+<meta property="og:image" content="http://blog.finegames.cn/2017/10/22/amqp-0-9-1-model-explained/exchange-declare-ok.png">
+<meta property="og:image" content="http://blog.finegames.cn/2017/10/22/amqp-0-9-1-model-explained/queue-declare.png">
+<meta property="og:image" content="http://blog.finegames.cn/2017/10/22/amqp-0-9-1-model-explained/queue-declare-ok.png">
+<meta property="og:updated_time" content="2018-09-10T14:02:46.594Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="AMQP 0-9-1模型解释">
 <meta name="twitter:description" content="本指南提供了AMQP 0-9-1协议的概述，该协议是RabbitMQ支持的协议之一。 AMQP 0-9-1AMQP 0-9-1(高级消息队列协议)是一种消息传递协议，它使符合标准的客户端应用程序能够与符合标准的消息传递中间件代理进行通信。 代理和他们的规则消息传递代理接收来自发布者的消息(发布它们的应用程序，也称为生产者)，并将它们发送给消费者(处理它们的应用程序)。 由于它是一种网络协议，发布者">
-<meta name="twitter:image" content="http://blog.finegames.cn/2017/10/22/amqp-0-9-1-model-explained/amqp-0-9-1-model-explained/hello-world-example-routing.png">
+<meta name="twitter:image" content="http://blog.finegames.cn/2017/10/22/amqp-0-9-1-model-explained/hello-world-example-routing.png">
 
 
 
@@ -274,14 +274,6 @@
     <a href="/archives/" rel="section">
       <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
   </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-commonweal">
-    <a href="/404/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />公益 404</a>
-  </li>
 
       
       
@@ -366,8 +358,8 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="王召辉">
-      <meta itemprop="description" content="wangzhaohui">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="description" content="Seven times I have despised my soul">
+      <meta itemprop="image" content="/images/avatar.jpeg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -421,7 +413,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-09-10 20:05:16" itemprop="dateModified" datetime="2018-09-10T20:05:16+08:00">2018-09-10</time>
+                <time title="修改时间：2018-09-10 22:02:46" itemprop="dateModified" datetime="2018-09-10T22:02:46+08:00">2018-09-10</time>
               
             
           </span>
@@ -500,7 +492,7 @@
 <h2 id="代理和他们的规则"><a href="#代理和他们的规则" class="headerlink" title="代理和他们的规则"></a>代理和他们的规则</h2><p>消息传递代理接收来自发布者的消息(发布它们的应用程序，也称为生产者)，并将它们发送给消费者(处理它们的应用程序)。</p>
 <p>由于它是一种网络协议，发布者、消费者和代理都可以在不同的机器上。</p>
 <h2 id="AMQP-0-9-1模型简述"><a href="#AMQP-0-9-1模型简述" class="headerlink" title="AMQP 0-9-1模型简述"></a>AMQP 0-9-1模型简述</h2><p>AMQP 0-9-1模型具有以下的世界观：信息被发布到交换(exchange)，经常被比作邮局或邮箱。交换使用称为绑定的规则将消息副本分发到队列。然后AMQP代理交付消息到订阅队列的消费者，或消费者根据需要从队列拉取消息。</p>
-<p><img src="amqp-0-9-1-model-explained/hello-world-example-routing.png" alt=""><br></p>
+<img src="/2017/10/22/amqp-0-9-1-model-explained/hello-world-example-routing.png" title="hello world example routing">
 <p>当发布消息时，发布者可以指定各种消息属性(消息元数据)。一些元数据可能会被代理使用，但其余的对于代理来说是完全不透明的，并且仅接收消息的应用程序使用。</p>
 <p>网络是不可靠的，应用程序可能无法处理消息，因此AMQP模型有一个消息确认的概念。当消息被交付到消费者时，消费者既可以自动，同样应用开发者也可以选择手动通知代理。当使用消息确认时，代理只会在接收到该消息(或一组消息)的通知时，才会完全删除队列中的消息。</p>
 <p>在某些情况下，例如，当一个消息不能被路由(routed)，消息可能会被返回给发布者，放弃，或如果代理实现了扩展，则将其放入所谓的“dead letter queue”中。发布者通过发布消息使用某些参数来选择如何处理这样的情况。</p>
@@ -553,7 +545,7 @@
 </ul>
 <p>Direct交换通常用来以一种循环的方式在多个woker之间分配任务（同一个应用的实例）。在这样做的时候，重要的一点是，在AMQP 0-9-1中，消息是在消费者之间，而不是在队列之间进行负载均衡。</p>
 <p>Direct交换可以用图形方式表示如下:</p>
-<p><img src="https://www.rabbitmq.com/img/tutorials/intro/exchange-direct.png" alt="direct"></p>
+<img src="/2017/10/22/amqp-0-9-1-model-explained/exchange-direct.png" title="direct exchange routing">
 <h3 id="Fanout交换"><a href="#Fanout交换" class="headerlink" title="Fanout交换"></a>Fanout交换</h3><p>一个fanout交换路由消息到所有绑定到它的队列，而路由键被忽略。如果N个队列被绑定到一个fanout交换，当一个新的消息被发布到该交换时，一个消息的副本将被发送到所有的N队列。Fanout交换是消息的广播路由的理想选择。</p>
 <p>因为一个fanout交换器将一个消息的副本传递给每个队列，所以它的用例非常相似:</p>
 <ul>
@@ -563,7 +555,7 @@
 <li>群组聊天可以在使用fanout交换的参与者之间分发消息(尽管AMQP没有一个内置的概念存在，所以XMPP可能是一个更好的选择)。</li>
 </ul>
 <p>一个fanout交换可以用图形方式表示如下:</p>
-<p><img src="https://www.rabbitmq.com/img/tutorials/intro/exchange-fanout.png" alt="fanout"></p>
+<img src="/2017/10/22/amqp-0-9-1-model-explained/exchange-fanout.png" title="fanout exchange rounting">
 <h3 id="Topic交换"><a href="#Topic交换" class="headerlink" title="Topic交换"></a>Topic交换</h3><p>主题交换基于消息路由键和用于将队列绑定到交换的模式之间的匹配，将消息路由到一个或多个队列。主题交换类型通常用于实现各种发布/订阅模式的变化。主题交换通常用于消息的多播路由。</p>
 <p>Topic交换有一个非常广泛的用例。当一个问题涉及多个消费者/应用程序，它们有选择性地选择它们想要什么类型的消息时，应该考虑使用主题交换。</p>
 <p>使用示例：</p>
@@ -646,14 +638,14 @@
 <p>(请注意，RabbitMQ站点参考还包括对exchange类的特定扩展，这些扩展是我们在本指南中不会讨论的)。</p>
 <p>上面的操作是逻辑对的；<code>exchange.declare</code>和<code>exchange.declare-ok</code>，<code>exchange.delete</code>和<code>exchange.delete-ok</code>。这些操作是“请求”(由客户端发送)和“响应”(由代理响应上述的“请求”)。</p>
 <p>例如，客户端请求代理使用<code>exchange.declare</code>声明一个新的交换。声明方法:</p>
-<p><img src="https://www.rabbitmq.com/img/tutorials/intro/exchange-declare.png" alt="exchange.declare"></p>
+<img src="/2017/10/22/amqp-0-9-1-model-explained/exchange-declare.png" title="declare exchange">
 <p>如上图所示，<code>exchange.declare</code>携带了几个参数。可以使客户端能够指定交换名称、类型、持久性标志等等。</p>
 <p>如果操作成功，代理使用<code>exchange.declare-ok</code>方法来响应：</p>
-<p><img src="https://www.rabbitmq.com/img/tutorials/intro/exchange-declare-ok.png" alt="exchange.declare-ok"></p>
+<img src="/2017/10/22/amqp-0-9-1-model-explained/exchange-declare-ok.png" title="declare exchange ok">
 <p><code>exchange.declare-ok</code>除了通道号(channel number)，不会携带任何参数。</p>
 <p>事件的发生顺序与AMQP queue类的另一个方法对，<code>queue-declare</code>和<code>queue-declare-ok</code>非常相似。</p>
-<p><img src="https://www.rabbitmq.com/img/tutorials/intro/queue-declare.png" alt="queue.declare"></p>
-<p><img src="https://www.rabbitmq.com/img/tutorials/intro/queue-declare-ok.png" alt="queue.declare-ok"></p>
+<img src="/2017/10/22/amqp-0-9-1-model-explained/queue-declare.png" title="declare queue">
+<img src="/2017/10/22/amqp-0-9-1-model-explained/queue-declare-ok.png" title="declare queue ok">
 <p>并非所有的AMQP方法都有对应的方法。一些（basic.publish作为最广泛使用的一种）没有对应的的“响应”方法和其他（例如，basic.get)有不止一种可能的“响应”。</p>
 <h2 id="连接"><a href="#连接" class="headerlink" title="连接"></a>连接</h2><p>AMQP连接通常是长期存在的。AMQP是一种应用程序级协议，它使用TCP进行可靠的传递。AMQP连接使用身份验证，可以使用TLS(SSL)保护。当应用程序不再需要连接到AMQP代理时，它应该优雅地关闭AMQP连接，而不是突然关闭底层的tcp连接。</p>
 <h2 id="通道"><a href="#通道" class="headerlink" title="通道"></a>通道</h2><p>一些应用程序需要多个AMQP代理连接。但是，同时保持许多TCP连接是不可取的，因为这样做会消耗系统资源，并且使配置防火墙变得更加困难。AMQP 0-9-1连接是多路复用的通道，可以被认为是“共享一个TCP连接的轻重量连接”。</p>
@@ -669,6 +661,7 @@
 <li>可以使用<a href="https://www.rabbitmq.com/plugins.html" target="_blank" rel="noopener">扩展的插件</a>扩展代理，例如，<a href="https://www.rabbitmq.com/management.html" target="_blank" rel="noopener">RabbitMQ管理</a>前端和HTTP API是作为一个插件实现的。</li>
 </ul>
 <p>这些特性使AMQP 0-9-1模型更加灵活，适用于非常广泛的问题。</p>
+<p>PS: 以上所展示AMQP中相应概念的代码已在我的<a href="https://github.com/metogefun/rabbitmq" target="_blank" rel="noopener">github</a>。</p>
 
       
     </div>
@@ -722,6 +715,8 @@
           
             <a href="/tags/amqp/" rel="tag"># amqp</a>
           
+            <a href="/tags/rabbitmq/" rel="tag"># rabbitmq</a>
+          
         </div>
       
 
@@ -739,8 +734,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/09/10/new-blog-theme/" rel="prev" title="使用hexo和NexT搭建博客">
-                使用hexo和NexT搭建博客 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/10/30/redis-exception/" rel="prev" title="redis异常汇总">
+                redis异常汇总 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -811,11 +806,11 @@
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
               <img class="site-author-image" itemprop="image"
-                src="/images/avatar.gif"
+                src="/images/avatar.jpeg"
                 alt="王召辉" />
             
               <p class="site-author-name" itemprop="name">王召辉</p>
-              <p class="site-description motion-element" itemprop="description">wangzhaohui</p>
+              <p class="site-description motion-element" itemprop="description">Seven times I have despised my soul</p>
           </div>
 
           
@@ -825,7 +820,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">2</span>
+                    <span class="site-state-item-count">14</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -842,7 +837,25 @@
                     
                       
                     
-                    <span class="site-state-item-count">1</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">11</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -859,7 +872,39 @@
                     
                       
                     
-                    <span class="site-state-item-count">2</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">18</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -1038,7 +1083,7 @@
 
   
   
-    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+    <script type="text/javascript" src="true"></script>
   
 
   
