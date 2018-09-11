@@ -116,7 +116,7 @@
 <meta property="og:site_name" content="王召辉">
 <meta property="og:description" content="随着公司业务增长，系统间交互变得频繁，由于目前公司架构以及基础设施都比较差bug不断，通常需要多个系统共同排查问题。对于跨系统定位bug问题，由于没有一个统一的traceId，很难将一个业务线的请求跟另一个业务线的请求关联起来。于是花了点时间，写了一套简单的解决方案，目前也在向各业务线进行推广。 因为内部系统使用的Dubbo作为RPC框架，该方案也是针对dubbo。代码地址：https://git">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-09-11T02:26:21.216Z">
+<meta property="og:updated_time" content="2018-09-11T08:58:38.155Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基于dubbo SPI实现trace">
 <meta name="twitter:description" content="随着公司业务增长，系统间交互变得频繁，由于目前公司架构以及基础设施都比较差bug不断，通常需要多个系统共同排查问题。对于跨系统定位bug问题，由于没有一个统一的traceId，很难将一个业务线的请求跟另一个业务线的请求关联起来。于是花了点时间，写了一套简单的解决方案，目前也在向各业务线进行推广。 因为内部系统使用的Dubbo作为RPC框架，该方案也是针对dubbo。代码地址：https://git">
@@ -405,7 +405,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-09-11 10:26:21" itemprop="dateModified" datetime="2018-09-11T10:26:21+08:00">2018-09-11</time>
+                <time title="修改时间：2018-09-11 16:58:38" itemprop="dateModified" datetime="2018-09-11T16:58:38+08:00">2018-09-11</time>
               
             
           </span>
@@ -489,6 +489,7 @@
         <p>随着公司业务增长，系统间交互变得频繁，由于目前公司架构以及基础设施都比较差bug不断，通常需要多个系统共同排查问题。对于跨系统定位bug问题，由于没有一个统一的traceId，很难将一个业务线的请求跟另一个业务线的请求关联起来。于是花了点时间，写了一套简单的解决方案，目前也在向各业务线进行推广。</p>
 <p>因为内部系统使用的Dubbo作为RPC框架，该方案也是针对dubbo。代码地址：<a href="https://github.com/metogefun/shadow" target="_blank" rel="noopener">https://github.com/metogefun/shadow</a></p>
 <p>设计之初最优先考虑的就是零侵入。为了使业务线更方便接入，所有一切都为了给业务线节省成本。该方案主要实用了Dubbo的<code>SPI机制</code>扩展了Filter，自定义两个不同的Filter，<code>TraceProviderFilter</code>和<code>TraceConsumerFilter</code>。实现的功能也很简单，从代码就能看出来做了什么。</p>
+<a id="more"></a>
 <p>TraceConsumerFilter，从<code>TraceContext</code>中获取已经放入的TRACE_ID，对使用次数进行+1操作，并将TRACE_ID作为附加参数传递到Dubbo Provider端，并在操作执行完成后进行释放，也就是-1。当为使用次数为0时，清除TraceContext。还有一个关键问题就是TRACE_ID是怎么初始化的呢？首先一个调用开始，肯定有一个主动出发的事件，大多数是用户的操作，也就是从web项目提供的接口开始，这时候需要在web程序中加一个拦截器，初始化TraceContext放入一个UUID生成的TRACE_ID，这个TRACE_ID存在ThreadLocal中方式并发存在的问题。</p>
 <p>TraceProviderFilter，在附加参数中获取TRACE_ID，并初始化它自己的TraceContext，如果该dubbo服务需要调用其他dubbo服务，需要将该TraceID传递下去，当然方法执行完成后，TRACE_ID也会进行销毁。</p>
 <p>这样整个调用链就可以绑定到同一个TraceId上，解决了我们开始提出的问题。后面也可以针对该TraceID做一些调用时长的监控，不过有很多解决方案，例如CAT、Pinpoint等，不过最简单的方案还是Pinpoint通过JavaAgent，不侵入代码，但是对性能会有影响。目前也在测试环境搭建了pinpoint环境很方便，并且针对于报警的二次开发很简单，也是推荐在没有成熟的调用链监控方案上，pinpoint不失为一种快捷有效的方式。</p>

@@ -116,7 +116,7 @@
 <meta property="og:site_name" content="王召辉">
 <meta property="og:description" content="项目中经常会遇到一些PO类中的某个字段的取值范围范围是一组固定的值，为了方便期间使用了number来存储这些值。这样会带来的一个问题，当我创建一个PO对象时，这个字段怎么赋值，应该有那些值？通常我们会提供一个enum来维护这个字段的取值范围，随之而来的问题当项目中enum越来越多，或者文档没有更新的情况下，开发人员很难知道，这个字段是不是有enum与之对应，或者是哪个enum与之对应。很多时候我们">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-09-10T14:09:12.643Z">
+<meta property="og:updated_time" content="2018-09-11T08:56:28.467Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mybatis使用enum">
 <meta name="twitter:description" content="项目中经常会遇到一些PO类中的某个字段的取值范围范围是一组固定的值，为了方便期间使用了number来存储这些值。这样会带来的一个问题，当我创建一个PO对象时，这个字段怎么赋值，应该有那些值？通常我们会提供一个enum来维护这个字段的取值范围，随之而来的问题当项目中enum越来越多，或者文档没有更新的情况下，开发人员很难知道，这个字段是不是有enum与之对应，或者是哪个enum与之对应。很多时候我们">
@@ -405,7 +405,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-09-10 22:09:12" itemprop="dateModified" datetime="2018-09-10T22:09:12+08:00">2018-09-10</time>
+                <time title="修改时间：2018-09-11 16:56:28" itemprop="dateModified" datetime="2018-09-11T16:56:28+08:00">2018-09-11</time>
               
             
           </span>
@@ -482,6 +482,7 @@
         <p>项目中经常会遇到一些PO类中的某个字段的取值范围范围是一组固定的值，为了方便期间使用了number来存储这些值。这样会带来的一个问题，当我创建一个PO对象时，这个字段怎么赋值，应该有那些值？通常我们会提供一个enum来维护这个字段的取值范围，随之而来的问题当项目中enum越来越多，或者文档没有更新的情况下，开发人员很难知道，这个字段是不是有enum与之对应，或者是哪个enum与之对应。很多时候我们知道有几种值，我们随手就赋值了一个字面常量值。这就可能出现了莫名其妙的类型。最直接的解决方案，我们在PO字段上直接声明enum类型，就完全避开了错误使用值的情况。</p>
 <p>MyBatis官网提供了两种方案，<code>EnumTypeHandler</code>和<code>EnumOrdinalTypeHandler</code>。EnumTypeHandler在数据库中使用<code>VARCHAR</code>存储enum的名字。<code>EnumOrdinalTypeHandler</code>在数据库使用<code>NUMBER</code>或<code>DOUBLE</code>存储enum的索引。</p>
 <p>我们更想的是在表中存储<code>NUMBER</code>类型，所以<code>EnumOrdinalTypeHandler</code>更适合我们的需求。<code>EnumOrdinalTypeHandler</code>存储是enum的索引，但是如果我们在enum中想使用自己的code，而不是enum本身的索引，要怎么去做呢？根据MyBatis官网文档我们可以自定义类型处理器来试下，下面是自定义处理器的使用方法。</p>
+<a id="more"></a>
 <p>既然我们的目的是想使用自定义的code存储到表中，所以首先我们应该强制我们的enum类型应该有对应的code字段，我们通过在enum中实现接口来实现。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">EnumCode</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 返回枚举值代码</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">getCode</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>上面我们定义了一个接口<code>EnumCode</code>它值定义了一个方法就是返回<code>code</code>。在我们的enum中实现该接口</p>

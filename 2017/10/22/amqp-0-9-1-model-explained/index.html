@@ -123,7 +123,7 @@
 <meta property="og:image" content="http://blog.finegames.cn/2017/10/22/amqp-0-9-1-model-explained/exchange-declare-ok.png">
 <meta property="og:image" content="http://blog.finegames.cn/2017/10/22/amqp-0-9-1-model-explained/queue-declare.png">
 <meta property="og:image" content="http://blog.finegames.cn/2017/10/22/amqp-0-9-1-model-explained/queue-declare-ok.png">
-<meta property="og:updated_time" content="2018-09-10T14:02:46.594Z">
+<meta property="og:updated_time" content="2018-09-11T08:57:41.257Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="AMQP 0-9-1模型解释">
 <meta name="twitter:description" content="本指南提供了AMQP 0-9-1协议的概述，该协议是RabbitMQ支持的协议之一。 AMQP 0-9-1AMQP 0-9-1(高级消息队列协议)是一种消息传递协议，它使符合标准的客户端应用程序能够与符合标准的消息传递中间件代理进行通信。 代理和他们的规则消息传递代理接收来自发布者的消息(发布它们的应用程序，也称为生产者)，并将它们发送给消费者(处理它们的应用程序)。 由于它是一种网络协议，发布者">
@@ -413,7 +413,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-09-10 22:02:46" itemprop="dateModified" datetime="2018-09-10T22:02:46+08:00">2018-09-10</time>
+                <time title="修改时间：2018-09-11 16:57:41" itemprop="dateModified" datetime="2018-09-11T16:57:41+08:00">2018-09-11</time>
               
             
           </span>
@@ -491,6 +491,7 @@
 <h2 id="AMQP-0-9-1"><a href="#AMQP-0-9-1" class="headerlink" title="AMQP 0-9-1"></a>AMQP 0-9-1</h2><p>AMQP 0-9-1(高级消息队列协议)是一种消息传递协议，它使符合标准的客户端应用程序能够与符合标准的消息传递中间件代理进行通信。</p>
 <h2 id="代理和他们的规则"><a href="#代理和他们的规则" class="headerlink" title="代理和他们的规则"></a>代理和他们的规则</h2><p>消息传递代理接收来自发布者的消息(发布它们的应用程序，也称为生产者)，并将它们发送给消费者(处理它们的应用程序)。</p>
 <p>由于它是一种网络协议，发布者、消费者和代理都可以在不同的机器上。</p>
+<a id="more"></a>
 <h2 id="AMQP-0-9-1模型简述"><a href="#AMQP-0-9-1模型简述" class="headerlink" title="AMQP 0-9-1模型简述"></a>AMQP 0-9-1模型简述</h2><p>AMQP 0-9-1模型具有以下的世界观：信息被发布到交换(exchange)，经常被比作邮局或邮箱。交换使用称为绑定的规则将消息副本分发到队列。然后AMQP代理交付消息到订阅队列的消费者，或消费者根据需要从队列拉取消息。</p>
 <img src="/2017/10/22/amqp-0-9-1-model-explained/hello-world-example-routing.png" title="hello world example routing">
 <p>当发布消息时，发布者可以指定各种消息属性(消息元数据)。一些元数据可能会被代理使用，但其余的对于代理来说是完全不透明的，并且仅接收消息的应用程序使用。</p>
