@@ -1,9 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Leancloud阅读统计]]></title>
+    <url>%2F2018%2F09%2F11%2Fleancloud-config%2F</url>
+    <content type="text"><![CDATA[Leancloud配置昨天博客改版后，添加了文章阅读次数统计，但是每次点进去之后提示Counter not initialized! See more at console err msg。在网上找了很多办法，终于搞定了。 记录下该大神的方案]]></content>
+      <tags>
+        <tag>hexo</tag>
+        <tag>NexT</tag>
+        <tag>leancloud</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[使用hexo和NexT搭建博客]]></title>
     <url>%2F2018%2F09%2F10%2Fnew-blog-theme%2F</url>
     <content type="text"><![CDATA[有时候有些东西看久了，还是应该适当的调整下，比如博客~ 最近看到别人家的blog通过hexo和NexT进行设计，遂也动心做下改版。 上面是两个东西的中文文档，按照教程操作还是比较快的。]]></content>
+      <tags>
+        <tag>hexo</tag>
+        <tag>NexT</tag>
+      </tags>
   </entry>
   <entry>
     <title><![CDATA[(转载）阿里巴巴为什么不用 ZooKeeper 做服务发现？]]></title>
