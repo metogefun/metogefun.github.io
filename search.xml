@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[使用hexo和NexT搭建博客]]></title>
     <url>%2F2018%2F09%2F10%2Fnew-blog-theme%2F</url>
-    <content type="text"><![CDATA[有时候有些东西看久了，还是应该适当的调整下，比如博客~ 最近看到别人家的blog通过hexo和NexT进行设计，遂也动心做下改版。 上面是两个东西的中文文档，按照教程操作还是比较快的。]]></content>
+    <content type="text"><![CDATA[有时候有些东西看久了，还是应该适当的调整下，比如博客~ 最近看到别人家的blog通过hexo和NexT进行设计，遂也动心做下改版。 评论系统使用valine 上面是两个东西的中文文档，按照教程操作还是比较快的。]]></content>
       <tags>
         <tag>hexo</tag>
         <tag>NexT</tag>
