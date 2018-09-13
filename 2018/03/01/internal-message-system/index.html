@@ -117,7 +117,7 @@
 <meta property="og:description" content="年后对目前系统存在的问题现状，做了一次深入的分析，将已经存在以及应对未来的需求做了些规划。之前确实挖的坑实在是太多，整个分析下来要做的有十几个大项，大部分是关于架构、数据、规范、服务化等方面。估计要做下来怎么也得一两年。。。真正做到了前人挖坑，后人填，如果这次没能做好前期架构，以及严格保证开发过程，可能也会造成”后人哀之而不鉴之，亦使后人而复哀后人也“的局面。 其中有一项算是服务拆分相关，抽取关键">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://blog.finegames.cn/2018/03/01/internal-message-system/message-as.png">
-<meta property="og:updated_time" content="2018-09-13T08:24:12.979Z">
+<meta property="og:updated_time" content="2018-09-13T08:27:27.165Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="消息系统">
 <meta name="twitter:description" content="年后对目前系统存在的问题现状，做了一次深入的分析，将已经存在以及应对未来的需求做了些规划。之前确实挖的坑实在是太多，整个分析下来要做的有十几个大项，大部分是关于架构、数据、规范、服务化等方面。估计要做下来怎么也得一两年。。。真正做到了前人挖坑，后人填，如果这次没能做好前期架构，以及严格保证开发过程，可能也会造成”后人哀之而不鉴之，亦使后人而复哀后人也“的局面。 其中有一项算是服务拆分相关，抽取关键">
@@ -407,7 +407,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-09-13 16:24:12" itemprop="dateModified" datetime="2018-09-13T16:24:12+08:00">2018-09-13</time>
+                <time title="修改时间：2018-09-13 16:27:27" itemprop="dateModified" datetime="2018-09-13T16:27:27+08:00">2018-09-13</time>
               
             
           </span>
@@ -496,7 +496,7 @@
 <p>关于消息持久化和发mq的事务保证。使用了spring的<code>@TransactionalEventListener</code>事件机制，在事务成功提交后回调该事件。同时还需要提供补偿机制，轮询表中（目前最简单的方式）一段时间内未发送mq成功的消息，进行重试。在多个<code>message-gateway</code>服务下，同时执行定时任务会存在问题，可以使用主备、或者分片方案，例如只让某一个服务进行轮询，其他服务作为备机，如果主挂了之后，再由备的去争夺轮询权限。也可以所有服务都可以轮询，将数据按照服务的数量分片。</p>
 <p>关于消息通道切换的问题，例如服务商商A挂掉后，可以动态的切到服务商B，也可以人为的切换通道。例如，A作为短信主通道，当通过A发送消息后，出现网络异常、或者单个用户超上限后，可以做整条通道切换和单用户通道切换。由于网络问题发生切换后，需要通过重试去验证通道是否恢复，待检测到恢复后需要切回。针对整条通道的切换分为主动和被动。主动是人为切换，所以不去做重试检测，如果为由于网络异常被动切换，则可以选举一个服务做重试检测。用户通道切换可以放在redis，第二天过期即可。</p>
 <p><code>outside-gateway</code>主要接受第三方回调，然后将回调信息丢到mq由<code>message-gateway</code>处理。如果在丢到mq失败的情况下也不要紧，会有补偿机制主动去查询。</p>
-<p>以上就是消息系统的大体设计思路。应为最近也在研究DDD，代码部分原遵照DDD去编写，不过我对DDD的理解还是比较浅显，可能有些不甚合理，所以将部分代码放<a href="https://github.com/metogefun/message" target="_blank" rel="noopener">在此</a>。有兴趣可以一起交流下。</p>
+<p>以上就是消息系统的大体设计思路。最近也在研究DDD，代码部分原遵照DDD去编写，不过我对DDD的理解还是比较浅显，可能有些不甚合理，所以将部分代码放<a href="https://github.com/metogefun/message" target="_blank" rel="noopener">在此</a>。有兴趣可以一起交流下。</p>
 
       
     </div>
