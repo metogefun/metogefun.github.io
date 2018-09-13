@@ -108,25 +108,27 @@
 
 
 
-  <meta name="description" content="有时候有些东西看久了，还是应该适当的调整下，比如博客~ 最近看到别人家的blog通过hexo和NexT进行设计，遂也动心做下改版。 评论系统使用valine 上面是两个东西的中文文档，按照教程操作还是比较快的。">
-<meta name="keywords" content="hexo,NexT">
+  <meta name="description" content="年后对目前系统存在的问题现状，做了一次深入的分析，将已经存在以及应对未来的需求做了些规划。之前确实挖的坑实在是太多，整个分析下来要做的有十几个大项，大部分是关于架构、数据、规范、服务化等方面。估计要做下来怎么也得一两年。。。真正做到了前人挖坑，后人填，如果这次没能做好前期架构，以及严格保证开发过程，可能也会造成”后人哀之而不鉴之，亦使后人而复哀后人也“的局面。 其中有一项算是服务拆分相关，抽取关键">
+<meta name="keywords" content="架构,消息">
 <meta property="og:type" content="article">
-<meta property="og:title" content="使用hexo和NexT搭建博客">
-<meta property="og:url" content="http://blog.finegames.cn/2018/09/10/new-blog-theme/index.html">
+<meta property="og:title" content="消息系统">
+<meta property="og:url" content="http://blog.finegames.cn/2018/03/01/internal-message-system/index.html">
 <meta property="og:site_name" content="王召辉">
-<meta property="og:description" content="有时候有些东西看久了，还是应该适当的调整下，比如博客~ 最近看到别人家的blog通过hexo和NexT进行设计，遂也动心做下改版。 评论系统使用valine 上面是两个东西的中文文档，按照教程操作还是比较快的。">
+<meta property="og:description" content="年后对目前系统存在的问题现状，做了一次深入的分析，将已经存在以及应对未来的需求做了些规划。之前确实挖的坑实在是太多，整个分析下来要做的有十几个大项，大部分是关于架构、数据、规范、服务化等方面。估计要做下来怎么也得一两年。。。真正做到了前人挖坑，后人填，如果这次没能做好前期架构，以及严格保证开发过程，可能也会造成”后人哀之而不鉴之，亦使后人而复哀后人也“的局面。 其中有一项算是服务拆分相关，抽取关键">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-09-12T09:20:42.886Z">
+<meta property="og:image" content="http://blog.finegames.cn/2018/03/01/internal-message-system/message-as.png">
+<meta property="og:updated_time" content="2018-09-13T08:24:12.979Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="使用hexo和NexT搭建博客">
-<meta name="twitter:description" content="有时候有些东西看久了，还是应该适当的调整下，比如博客~ 最近看到别人家的blog通过hexo和NexT进行设计，遂也动心做下改版。 评论系统使用valine 上面是两个东西的中文文档，按照教程操作还是比较快的。">
+<meta name="twitter:title" content="消息系统">
+<meta name="twitter:description" content="年后对目前系统存在的问题现状，做了一次深入的分析，将已经存在以及应对未来的需求做了些规划。之前确实挖的坑实在是太多，整个分析下来要做的有十几个大项，大部分是关于架构、数据、规范、服务化等方面。估计要做下来怎么也得一两年。。。真正做到了前人挖坑，后人填，如果这次没能做好前期架构，以及严格保证开发过程，可能也会造成”后人哀之而不鉴之，亦使后人而复哀后人也“的局面。 其中有一项算是服务拆分相关，抽取关键">
+<meta name="twitter:image" content="http://blog.finegames.cn/2018/03/01/internal-message-system/message-as.png">
 
 
 
 
 
 
-  <link rel="canonical" href="http://blog.finegames.cn/2018/09/10/new-blog-theme/"/>
+  <link rel="canonical" href="http://blog.finegames.cn/2018/03/01/internal-message-system/"/>
 
 
 
@@ -136,7 +138,7 @@
   };
 </script>
 
-  <title>使用hexo和NexT搭建博客 | 王召辉</title>
+  <title>消息系统 | 王召辉</title>
   
 
 
@@ -346,7 +348,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.finegames.cn/2018/09/10/new-blog-theme/">
+    <link itemprop="mainEntityOfPage" href="http://blog.finegames.cn/2018/03/01/internal-message-system/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="王召辉">
@@ -363,7 +365,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">使用hexo和NexT搭建博客
+          <h1 class="post-title" itemprop="name headline">消息系统
               
             
           </h1>
@@ -388,7 +390,7 @@
                 
               
 
-              <time title="创建时间：2018-09-10 18:30:18" itemprop="dateCreated datePublished" datetime="2018-09-10T18:30:18+08:00">2018-09-10</time>
+              <time title="创建时间：2018-03-01 14:34:52" itemprop="dateCreated datePublished" datetime="2018-03-01T14:34:52+08:00">2018-03-01</time>
             
 
             
@@ -405,11 +407,29 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-09-12 17:20:42" itemprop="dateModified" datetime="2018-09-12T17:20:42+08:00">2018-09-12</time>
+                <time title="修改时间：2018-09-13 16:24:12" itemprop="dateModified" datetime="2018-09-13T16:24:12+08:00">2018-09-13</time>
               
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/实例/" itemprop="url" rel="index"><span itemprop="name">实例</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -419,8 +439,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/09/10/new-blog-theme/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/09/10/new-blog-theme/" itemprop="commentCount"></span>
+                <a href="/2018/03/01/internal-message-system/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/03/01/internal-message-system/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -428,7 +448,7 @@
 
           
           
-             <span id="/2018/09/10/new-blog-theme/" class="leancloud_visitors" data-flag-title="使用hexo和NexT搭建博客">
+             <span id="/2018/03/01/internal-message-system/" class="leancloud_visitors" data-flag-title="消息系统">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -459,10 +479,24 @@
       
 
       
-        <p>有时候有些东西看久了，还是应该适当的调整下，比如博客~</p>
-<p>最近看到别人家的blog通过<a href="https://hexo.io/zh-cn/" target="_blank" rel="noopener">hexo</a>和<a href="http://theme-next.iissnan.com/" target="_blank" rel="noopener">NexT</a>进行设计，遂也动心做下改版。</p>
-<p>评论系统使用<a href="https://valine.js.org/" target="_blank" rel="noopener">valine</a></p>
-<p>上面是两个东西的中文文档，按照教程操作还是比较快的。</p>
+        <p>年后对目前系统存在的问题现状，做了一次深入的分析，将已经存在以及应对未来的需求做了些规划。之前确实挖的坑实在是太多，整个分析下来要做的有十几个大项，大部分是关于架构、数据、规范、服务化等方面。估计要做下来怎么也得一两年。。。真正做到了前人挖坑，后人填，如果这次没能做好前期架构，以及严格保证开发过程，可能也会造成”后人哀之而不鉴之，亦使后人而复哀后人也“的局面。</p>
+<p>其中有一项算是服务拆分相关，抽取关键的公共服务。消息系统算是其中之一。目前内部对于系统的要求场景比较单一，主要就是短信和钉钉两种。谈起设计起始感觉也有点老生常谈，平时我们听过的设计方案，基本就足以支持现在的业务量。更多的还是要关注细节。下图是整个系统的描述：</p>
+<img src="/2018/03/01/internal-message-system/message-as.png" title="message as">
+<a id="more"></a>
+<p>整体相对简单，在这就坐下简单的介绍：</p>
+<ul>
+<li>message-gateway 消息网关。通过暴露统一的restapi方式，为内部提供消息发送功能。服务收到消息会在本地持久化，发送MQ消息，然后返回给客户端。并在之后处理消息响应以及回调改变消息状态。</li>
+<li>outside-gateway 外部网关。一般接入第三方消息系统都会有回调机制，该服务为了处理第三方回调，然后将结果发送到mq由message-gateway处理。</li>
+<li>消息服务，剩下的就是跟第三方消息系统对接的服务。为了方便扩展，可能跟每个第三方服务都会有一个接入</li>
+</ul>
+<p>系统的核心是<code>message-gateway</code>服务，所以保证该服务稳定至关重要，在此引入eureka作为注册中心，用于服务发现和客户端负载。因为内部多为dubbo服务，采用zk作为注册中心，所以还需要为使用方提供访问eureka的帮助类。</p>
+<p>关于为什么选用eureka，之前也是看过一篇相关的文章<a href="https://medium.com/knerd/eureka-why-you-shouldnt-use-zookeeper-for-service-discovery-4932c5c7e764" target="_blank" rel="noopener">Eureka! Why You Shouldn’t Use ZooKeeper for Service Discovery</a>。但是总体来说对于我们目前的量级，用什么基本感知一样，但是有一个确实比较严重的问题就是jar包依赖。使用dubbo一般会暴露服务的api包给使用方，但是这就要求有一个合理的版本升级机制，但是。。。目前比较混乱，也没有所谓的版本升级。经常发现线上各种SNAPSHOT版本，新添加的功能直接在原来版本上改，然后直接deploy，线上使用同一maven私服，当部署线上时直接使用了最新的SNAPSHOT。经常会有一些接口不兼容的升级。。。所以引入rest也是想从源头杜绝这种情况。</p>
+<p>message-gateway提供了签名验证机制。使用的业务方接入要分配一个账号、秘钥，在正常传入请求参数的同时，还需要提供一个根据参数列表，以及秘钥进行MD5加密后的签名。同时服务端提供拦截器进行拦截验证安全性。</p>
+<p>对于消息的附加了一系列的过滤链，提供了关于幂等性验证、账号黑名单、ip黑名单以及下发ip白名单的过滤机制。这里说下幂等性，目前实现比较简单，主要是针对发送内容、账号做了MD5加密后作为key存入redis，策略是对于验证码类的短信，简单的做下过期。</p>
+<p>关于消息持久化和发mq的事务保证。使用了spring的<code>@TransactionalEventListener</code>事件机制，在事务成功提交后回调该事件。同时还需要提供补偿机制，轮询表中（目前最简单的方式）一段时间内未发送mq成功的消息，进行重试。在多个<code>message-gateway</code>服务下，同时执行定时任务会存在问题，可以使用主备、或者分片方案，例如只让某一个服务进行轮询，其他服务作为备机，如果主挂了之后，再由备的去争夺轮询权限。也可以所有服务都可以轮询，将数据按照服务的数量分片。</p>
+<p>关于消息通道切换的问题，例如服务商商A挂掉后，可以动态的切到服务商B，也可以人为的切换通道。例如，A作为短信主通道，当通过A发送消息后，出现网络异常、或者单个用户超上限后，可以做整条通道切换和单用户通道切换。由于网络问题发生切换后，需要通过重试去验证通道是否恢复，待检测到恢复后需要切回。针对整条通道的切换分为主动和被动。主动是人为切换，所以不去做重试检测，如果为由于网络异常被动切换，则可以选举一个服务做重试检测。用户通道切换可以放在redis，第二天过期即可。</p>
+<p><code>outside-gateway</code>主要接受第三方回调，然后将回调信息丢到mq由<code>message-gateway</code>处理。如果在丢到mq失败的情况下也不要紧，会有补偿机制主动去查询。</p>
+<p>以上就是消息系统的大体设计思路。应为最近也在研究DDD，代码部分原遵照DDD去编写，不过我对DDD的理解还是比较浅显，可能有些不甚合理，所以将部分代码放<a href="https://github.com/metogefun/message" target="_blank" rel="noopener">在此</a>。有兴趣可以一起交流下。</p>
 
       
     </div>
@@ -512,9 +546,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/hexo/" rel="tag"># hexo</a>
+            <a href="/tags/架构/" rel="tag"># 架构</a>
           
-            <a href="/tags/NexT/" rel="tag"># NexT</a>
+            <a href="/tags/消息/" rel="tag"># 消息</a>
           
         </div>
       
@@ -527,8 +561,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/06/13/ali-nonuse-zk/" rel="next" title="(转载）阿里巴巴为什么不用 ZooKeeper 做服务发现？">
-                <i class="fa fa-chevron-left"></i> (转载）阿里巴巴为什么不用 ZooKeeper 做服务发现？
+              <a href="/2018/01/19/dubbo-spi-trace/" rel="next" title="基于dubbo SPI实现trace">
+                <i class="fa fa-chevron-left"></i> 基于dubbo SPI实现trace
               </a>
             
           </div>
@@ -536,6 +570,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/13/ali-nonuse-zk/" rel="prev" title="(转载）阿里巴巴为什么不用 ZooKeeper 做服务发现？">
+                (转载）阿里巴巴为什么不用 ZooKeeper 做服务发现？ <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
