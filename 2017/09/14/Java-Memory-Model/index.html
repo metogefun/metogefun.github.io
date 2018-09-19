@@ -14,7 +14,7 @@
   
 
 
-<html class="theme-next muse use-motion" lang="zh-CN">
+<html class="theme-next pisces use-motion" lang="zh-CN">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -84,7 +84,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Muse',
+    scheme: 'Pisces',
     version: '6.4.1',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: false,
@@ -122,7 +122,7 @@
 <meta property="og:image" content="http://blog.finegames.cn/2017/09/14/Java-Memory-Model/java-memory-model-4.png">
 <meta property="og:image" content="http://blog.finegames.cn/2017/09/14/Java-Memory-Model/java-memory-model-6.png">
 <meta property="og:image" content="http://blog.finegames.cn/2017/09/14/Java-Memory-Model/java-memory-model-6.png">
-<meta property="og:updated_time" content="2018-09-14T10:21:27.712Z">
+<meta property="og:updated_time" content="2018-09-14T12:19:01.089Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java内存模型">
 <meta name="twitter:description" content="Java内存模型指定Java虚拟机如何与计算机的内存（RAM）一起工作。Java虚拟机是整个计算机的模型，因此该模型自然包括一个内存模型 - 也就是Java内存模型。 如果要设计正确的并发程序，了解Java内存模型非常重要。Java内存模型指定不同线程如何以及何时可以看到其他线程写入共享变量的值，以及如何在必要时同步对共享变量的访问。原始Java内存模型不足，因此Java内存模型在Java 1.5">
@@ -288,9 +288,6 @@
   
 
   
-    
-
-  
 
   
     <div class="site-search">
@@ -334,6 +331,9 @@
       <div class="main-inner">
         <div class="content-wrap">
           
+            
+
+          
           <div id="content" class="content">
             
 
@@ -358,7 +358,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="王召辉">
       <meta itemprop="description" content="Seven times I have despised my soul">
-      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="image" content="/images/header.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -412,7 +412,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-09-14 18:21:27" itemprop="dateModified" datetime="2018-09-14T18:21:27+08:00">2018-09-14</time>
+                <time title="修改时间：2018-09-14 20:19:01" itemprop="dateModified" datetime="2018-09-14T20:19:01+08:00">2018-09-14</time>
               
             
           </span>
@@ -542,6 +542,7 @@
 <p>该图说明了如上所述的竞争条件问题的发生：</p>
 <img src="/2017/09/14/Java-Memory-Model/java-memory-model-6.png" title="java memory model">
 <p>要解决此问题，您可以使用Java synchronized块。同步块保证在任何给定时间只有一个线程可以进入代码的给定关键部分。同步块还保证在同步块内访问的所有变量都将从主内存读入，当线程退出同步块时，无论变量是否声明为volatile，所有更新的变量都将再次刷回主内存。</p>
+<p>文章翻译<a href="http://tutorials.jenkov.com/java-concurrency/java-memory-model.html" target="_blank" rel="noopener">自</a></p>
 
       
     </div>
@@ -677,7 +678,7 @@
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
               <img class="site-author-image" itemprop="image"
-                src="/images/avatar.jpeg"
+                src="/images/header.jpg"
                 alt="王召辉" />
             
               <p class="site-author-name" itemprop="name">王召辉</p>
@@ -691,7 +692,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">16</span>
+                    <span class="site-state-item-count">17</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -728,7 +729,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">12</span>
+                      
+                    
+                    <span class="site-state-item-count">13</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -789,7 +792,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">22</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">24</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -881,7 +888,7 @@
 
 
 
-  <div class="theme-info">主题 – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Muse</a> v6.4.1</div>
+  <div class="theme-info">主题 – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Pisces</a> v6.4.1</div>
 
 
 
@@ -993,6 +1000,13 @@
 
   
   
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.4.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.1"></script>
+
+
 
   
   <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.1"></script>
