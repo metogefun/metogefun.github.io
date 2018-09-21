@@ -53,6 +53,50 @@
 
 
 
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
 
 
 
@@ -108,25 +152,25 @@
 
 
 
-  <meta name="description" content="本篇阐述mysql InnoDB引擎锁分类以及相关知识 共享锁和排它锁我们都知道InnoDB实现了行级锁，行级锁分为两类：共享和排他。  共享锁(Sharded Lock, S)允许持有锁的事务读取行 排它锁(Exclusive Lock, X)允许持有锁的事务更新或删除行">
+  <meta name="description" content="本篇介绍InnoDB使用的锁类型，并提供了一些例子来更加深入的介绍了锁。 共享锁和排它锁我们都知道InnoDB实现了行级锁，行级锁分为两类：共享和排他。  共享锁(Sharded Lock, S)允许持有锁的事务读取行 排它锁(Exclusive Lock, X)允许持有锁的事务更新或删除行">
 <meta name="keywords" content="Lock,InnoDB">
 <meta property="og:type" content="article">
-<meta property="og:title" content="mysql InnoDB 锁">
-<meta property="og:url" content="http://blog.finegames.cn/2018/03/08/mysql-lock/index.html">
+<meta property="og:title" content="InnoDB锁和事务模型 —— 锁">
+<meta property="og:url" content="http://blog.finegames.cn/2018/03/08/innodb-locking/index.html">
 <meta property="og:site_name" content="Be the best version of you">
-<meta property="og:description" content="本篇阐述mysql InnoDB引擎锁分类以及相关知识 共享锁和排它锁我们都知道InnoDB实现了行级锁，行级锁分为两类：共享和排他。  共享锁(Sharded Lock, S)允许持有锁的事务读取行 排它锁(Exclusive Lock, X)允许持有锁的事务更新或删除行">
+<meta property="og:description" content="本篇介绍InnoDB使用的锁类型，并提供了一些例子来更加深入的介绍了锁。 共享锁和排它锁我们都知道InnoDB实现了行级锁，行级锁分为两类：共享和排他。  共享锁(Sharded Lock, S)允许持有锁的事务读取行 排它锁(Exclusive Lock, X)允许持有锁的事务更新或删除行">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-09-20T06:38:46.612Z">
+<meta property="og:updated_time" content="2018-09-21T07:17:29.244Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="mysql InnoDB 锁">
-<meta name="twitter:description" content="本篇阐述mysql InnoDB引擎锁分类以及相关知识 共享锁和排它锁我们都知道InnoDB实现了行级锁，行级锁分为两类：共享和排他。  共享锁(Sharded Lock, S)允许持有锁的事务读取行 排它锁(Exclusive Lock, X)允许持有锁的事务更新或删除行">
+<meta name="twitter:title" content="InnoDB锁和事务模型 —— 锁">
+<meta name="twitter:description" content="本篇介绍InnoDB使用的锁类型，并提供了一些例子来更加深入的介绍了锁。 共享锁和排它锁我们都知道InnoDB实现了行级锁，行级锁分为两类：共享和排他。  共享锁(Sharded Lock, S)允许持有锁的事务读取行 排它锁(Exclusive Lock, X)允许持有锁的事务更新或删除行">
 
 
 
 
 
 
-  <link rel="canonical" href="http://blog.finegames.cn/2018/03/08/mysql-lock/"/>
+  <link rel="canonical" href="http://blog.finegames.cn/2018/03/08/innodb-locking/"/>
 
 
 
@@ -136,7 +180,7 @@
   };
 </script>
 
-  <title>mysql InnoDB 锁 | Be the best version of you</title>
+  <title>InnoDB锁和事务模型 —— 锁 | Be the best version of you</title>
   
 
 
@@ -346,7 +390,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.finegames.cn/2018/03/08/mysql-lock/">
+    <link itemprop="mainEntityOfPage" href="http://blog.finegames.cn/2018/03/08/innodb-locking/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="王召辉">
@@ -363,7 +407,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">mysql InnoDB 锁
+          <h1 class="post-title" itemprop="name headline">InnoDB锁和事务模型 —— 锁
               
             
           </h1>
@@ -405,7 +449,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-09-20 14:38:46" itemprop="dateModified" datetime="2018-09-20T14:38:46+08:00">2018-09-20</time>
+                <time title="修改时间：2018-09-21 15:17:29" itemprop="dateModified" datetime="2018-09-21T15:17:29+08:00">2018-09-21</time>
               
             
           </span>
@@ -437,8 +481,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/03/08/mysql-lock/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/03/08/mysql-lock/" itemprop="commentCount"></span>
+                <a href="/2018/03/08/innodb-locking/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/03/08/innodb-locking/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -446,7 +490,7 @@
 
           
           
-             <span id="/2018/03/08/mysql-lock/" class="leancloud_visitors" data-flag-title="mysql InnoDB 锁">
+             <span id="/2018/03/08/innodb-locking/" class="leancloud_visitors" data-flag-title="InnoDB锁和事务模型 —— 锁">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -477,7 +521,7 @@
       
 
       
-        <p>本篇阐述mysql InnoDB引擎锁分类以及相关知识</p>
+        <p>本篇介绍InnoDB使用的锁类型，并提供了一些例子来更加深入的介绍了锁。</p>
 <h1 id="共享锁和排它锁"><a href="#共享锁和排它锁" class="headerlink" title="共享锁和排它锁"></a>共享锁和排它锁</h1><p>我们都知道InnoDB实现了行级锁，行级锁分为两类：共享和排他。</p>
 <ul>
 <li>共享锁(Sharded Lock, S)允许持有锁的事务读取行</li>
@@ -537,7 +581,7 @@
 </tbody>
 </table>
 <p>如果锁与现有锁兼容，则向请求事务授予锁，但如果它与现有锁冲突，则不授予锁。事务等待直到冲突的现有锁被释放。</p>
-<h1 id="记录锁-Record-Lock"><a href="#记录锁-Record-Lock" class="headerlink" title="记录锁(Record Lock)"></a>记录锁(Record Lock)</h1><p>记录锁是索引记录上的锁。InnoDB的行锁实现方式是锁定索引记录，而不是行数据。例如，<code>SELECT c1 FROM t WHERE c1 = 10 FOR UPDATE;</code> 防止任何其他事务插入，更新或删除t.c1的值为10的行。</p>
+<h1 id="记录锁-Record-Lock"><a href="#记录锁-Record-Lock" class="headerlink" title="记录锁(Record Lock)"></a>记录锁(Record Lock)</h1><p>记录锁是索引记录上的锁。索引必须是<code>主键索引</code>或<code>唯一索引</code>。InnoDB的行锁实现方式是锁定索引记录，而不是行数据。例如，<code>SELECT c1 FROM t WHERE c1 = 10 FOR UPDATE;</code> 防止任何其他事务插入，更新或删除t.c1的值为10的行。</p>
 <p>如果一个查询条件没有索引，则将会使用表锁。</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">START</span> <span class="keyword">TRANSACTION</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> <span class="keyword">user</span> <span class="keyword">where</span> <span class="keyword">name</span> = <span class="string">'zhao'</span> <span class="keyword">for</span> <span class="keyword">update</span>;</span><br><span class="line">+<span class="comment">----+------+</span></span><br><span class="line">| id | name |</span><br><span class="line">+<span class="comment">----+------+</span></span><br><span class="line">|  1 | zhao |</span><br><span class="line">+<span class="comment">----+------+</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">START</span> <span class="keyword">TRANSACTION</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> <span class="string">`user`</span> <span class="keyword">WHERE</span> <span class="keyword">id</span> = <span class="number">1</span> <span class="keyword">for</span> <span class="keyword">update</span>;</span><br><span class="line">ERROR 1205 (HY000): <span class="keyword">Lock</span> <span class="keyword">wait</span> <span class="keyword">timeout</span> exceeded; try restarting transaction</span><br></pre></td></tr></table></figure>
 <p>以上例子中，第一个事务占有name=’zhao’的排它锁，但是第二个事务却无法获取到id=1的排它锁，所以id=1也被第一个事务锁定。造成这个问题的原因是因为name上没有索引存在，会进行全表扫描，所以就对整张表进行锁定。</p>
@@ -555,7 +599,7 @@
 <p>InnoDB中的间隙锁是“纯粹的抑制”，这意味着它们只能阻止其他事务插入间隙。它们不会阻止不同的事务在同一间隙上进行间隙锁定。 因此，间隙X锁具有与间隙S锁相同的效果。</p>
 <p>可以显式禁用间隙锁。如果将事务隔离级别更改为READ COMMITTED或启用innodb_locks_unsafe_for_binlog系统变量（现已弃用），则会发生这种情况。在这些情况下，对于搜索和索引扫描禁用间隙锁定，并且仅用于外键约束检查和重复键检查。</p>
 <p>使用READ COMMITTED隔离级别或启用innodb_locks_unsafe_for_binlog还有其他影响。MySQL评估了WHERE条件后，将释放不匹配行的记录锁。对于UPDATE语句，InnoDB执行“半一致”读取，以便将最新提交的版本返回给MySQL，以便MySQL可以确定该行是否与UPDATE的WHERE条件匹配。</p>
-<h1 id="Next-Key锁"><a href="#Next-Key锁" class="headerlink" title="Next-Key锁"></a>Next-Key锁</h1><p>Next-Key锁是索引记录上的记录锁和索引记录之前的间隙上的间隙锁的组合。</p>
+<h1 id="Next-Key锁"><a href="#Next-Key锁" class="headerlink" title="Next-Key锁"></a>Next-Key锁</h1><p>Next-Key锁是索引记录上的记录锁和索引记录之前的间隙上的间隙锁的组合。该索引记录为非唯一性索引。</p>
 <p>InnoDB以这样的方式执行行级锁定：当它搜索或扫描表索引时，它会在遇到的索引记录上设置共享锁或排它锁。因此，行级锁实际上是索引记录锁。索引记录上的Next-key锁也会影响该索引记录之前的“间隙”。也就是说，Next-Key锁是索引记录锁加上索引记录之前的间隙上的间隙锁。如果一个会话在索引中的记录R上具有共享锁或独占锁，则另一个会话不能在索引顺序中的R之前的间隙中插入新的索引记录。</p>
 <p>假设索引包含值10,11,13和20。此索引的可能的Next-Key锁包括以下间隔，其中圆括号表示区间终点的排除，方括号表示包含端点：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(negative infinity, 10]</span><br><span class="line">(10, 11]</span><br><span class="line">(11, 13]</span><br><span class="line">(13, 20]</span><br><span class="line">(20, positive infinity)</span><br></pre></td></tr></table></figure>
@@ -649,8 +693,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/06/13/ali-nonuse-zk/" rel="prev" title="(转载）阿里巴巴为什么不用 ZooKeeper 做服务发现？">
-                (转载）阿里巴巴为什么不用 ZooKeeper 做服务发现？ <i class="fa fa-chevron-right"></i>
+              <a href="/2018/03/15/innodb-transaction-model/" rel="prev" title="InnoDB锁和事务模型 —— 事务模型">
+                InnoDB锁和事务模型 —— 事务模型 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -728,7 +772,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">17</span>
+                    <span class="site-state-item-count">18</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -832,7 +876,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">24</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">26</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
