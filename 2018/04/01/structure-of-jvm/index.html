@@ -152,25 +152,25 @@
 
 
 
-  <meta name="description" content="1MyBatis为一个系列，深入分析MyBatis代码。本篇我们先大体的看下MyBatis整个的执行流程，对MyBatis整体有个了解，后面我们在找几个主题深入的去讨论，比如缓存、连接池等，最终通过MyBatis系列，希望对你有所帮助，那么我们开始吧！ 首先每一个框架都会有一个入口，让我们可以很容易的拿来即用，我们同样可以沿着入口，了解这个框架的整体流程，然后在深扒底层的原理细节。MyBatis官">
-<meta name="keywords" content="mybatis">
+  <meta name="description" content="class文件格式由Java虚拟机执行的编译代码使用独立于硬件和操作系统的二进制格式表示，通常（但不一定）存储在文件中，称为类文件格式。类文件格式精确定义了类或接口的表示形式，包括可能以特定于平台的目标文件格式获取的字节顺序等详细信息。 数据类型JVM有两种类型，primitive type和reference type。">
+<meta name="keywords" content="jvm">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MyBatis源码分析">
-<meta property="og:url" content="http://blog.finegames.cn/2018/09/25/mybatis-source-code/index.html">
+<meta property="og:title" content="JVMS8 - Java虚拟机的结构">
+<meta property="og:url" content="http://blog.finegames.cn/2018/04/01/structure-of-jvm/index.html">
 <meta property="og:site_name" content="Be the best version of you">
-<meta property="og:description" content="1MyBatis为一个系列，深入分析MyBatis代码。本篇我们先大体的看下MyBatis整个的执行流程，对MyBatis整体有个了解，后面我们在找几个主题深入的去讨论，比如缓存、连接池等，最终通过MyBatis系列，希望对你有所帮助，那么我们开始吧！ 首先每一个框架都会有一个入口，让我们可以很容易的拿来即用，我们同样可以沿着入口，了解这个框架的整体流程，然后在深扒底层的原理细节。MyBatis官">
+<meta property="og:description" content="class文件格式由Java虚拟机执行的编译代码使用独立于硬件和操作系统的二进制格式表示，通常（但不一定）存储在文件中，称为类文件格式。类文件格式精确定义了类或接口的表示形式，包括可能以特定于平台的目标文件格式获取的字节顺序等详细信息。 数据类型JVM有两种类型，primitive type和reference type。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-09-26T12:42:07.266Z">
+<meta property="og:updated_time" content="2018-09-26T12:51:55.530Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MyBatis源码分析">
-<meta name="twitter:description" content="1MyBatis为一个系列，深入分析MyBatis代码。本篇我们先大体的看下MyBatis整个的执行流程，对MyBatis整体有个了解，后面我们在找几个主题深入的去讨论，比如缓存、连接池等，最终通过MyBatis系列，希望对你有所帮助，那么我们开始吧！ 首先每一个框架都会有一个入口，让我们可以很容易的拿来即用，我们同样可以沿着入口，了解这个框架的整体流程，然后在深扒底层的原理细节。MyBatis官">
+<meta name="twitter:title" content="JVMS8 - Java虚拟机的结构">
+<meta name="twitter:description" content="class文件格式由Java虚拟机执行的编译代码使用独立于硬件和操作系统的二进制格式表示，通常（但不一定）存储在文件中，称为类文件格式。类文件格式精确定义了类或接口的表示形式，包括可能以特定于平台的目标文件格式获取的字节顺序等详细信息。 数据类型JVM有两种类型，primitive type和reference type。">
 
 
 
 
 
 
-  <link rel="canonical" href="http://blog.finegames.cn/2018/09/25/mybatis-source-code/"/>
+  <link rel="canonical" href="http://blog.finegames.cn/2018/04/01/structure-of-jvm/"/>
 
 
 
@@ -180,7 +180,7 @@
   };
 </script>
 
-  <title>MyBatis源码分析 | Be the best version of you</title>
+  <title>JVMS8 - Java虚拟机的结构 | Be the best version of you</title>
   
 
 
@@ -390,7 +390,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.finegames.cn/2018/09/25/mybatis-source-code/">
+    <link itemprop="mainEntityOfPage" href="http://blog.finegames.cn/2018/04/01/structure-of-jvm/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="王召辉">
@@ -407,7 +407,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">MyBatis源码分析
+          <h1 class="post-title" itemprop="name headline">JVMS8 - Java虚拟机的结构
               
             
           </h1>
@@ -432,7 +432,7 @@
                 
               
 
-              <time title="创建时间：2018-09-25 19:45:33" itemprop="dateCreated datePublished" datetime="2018-09-25T19:45:33+08:00">2018-09-25</time>
+              <time title="创建时间：2018-04-01 14:52:12" itemprop="dateCreated datePublished" datetime="2018-04-01T14:52:12+08:00">2018-04-01</time>
             
 
             
@@ -449,7 +449,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-09-26 20:42:07" itemprop="dateModified" datetime="2018-09-26T20:42:07+08:00">2018-09-26</time>
+                <time title="修改时间：2018-09-26 20:51:55" itemprop="dateModified" datetime="2018-09-26T20:51:55+08:00">2018-09-26</time>
               
             
           </span>
@@ -466,7 +466,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/源码/" itemprop="url" rel="index"><span itemprop="name">源码</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/jvms/" itemprop="url" rel="index"><span itemprop="name">jvms</span></a></span>
 
                 
                 
@@ -481,8 +481,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/09/25/mybatis-source-code/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/09/25/mybatis-source-code/" itemprop="commentCount"></span>
+                <a href="/2018/04/01/structure-of-jvm/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/04/01/structure-of-jvm/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -490,7 +490,7 @@
 
           
           
-             <span id="/2018/09/25/mybatis-source-code/" class="leancloud_visitors" data-flag-title="MyBatis源码分析">
+             <span id="/2018/04/01/structure-of-jvm/" class="leancloud_visitors" data-flag-title="JVMS8 - Java虚拟机的结构">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -521,37 +521,39 @@
       
 
       
-        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MyBatis为一个系列，深入分析MyBatis代码。本篇我们先大体的看下MyBatis整个的执行流程，对MyBatis整体有个了解，后面我们在找几个主题深入的去讨论，比如缓存、连接池等，最终通过MyBatis系列，希望对你有所帮助，那么我们开始吧！</span><br></pre></td></tr></table></figure>
-<p>首先每一个框架都会有一个入口，让我们可以很容易的拿来即用，我们同样可以沿着入口，了解这个框架的整体流程，然后在深扒底层的原理细节。<a href="http://www.mybatis.org/mybatis-3/zh/index.html" target="_blank" rel="noopener">MyBatis官网</a>提供给我们如何在项目中使用它。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">String resource = <span class="string">"org/mybatis/example/mybatis-config.xml"</span>;</span><br><span class="line">InputStream inputStream = Resources.getResourceAsStream(resource);</span><br><span class="line">SqlSessionFactory sqlSessionFactory = <span class="keyword">new</span> SqlSessionFactoryBuilder().build(inputStream);</span><br></pre></td></tr></table></figure>
-<p>上面代码中创建了一个<code>SqlSessionFactory</code>，也就是MyBatis的入口。它的主要功能就是创建<code>SqlSession</code>。</p>
-<p>在<code>SqlSessionFactyoryBuilder</code>类中根据提供的XML配置，创建了一个<code>DefaultSqlSessionFactory</code>的实例<code></code></p>
-<p>如果要使用MyBatis进行查询，官网给了我们对应的例子。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">SqlSession session = sqlSessionFactory.openSession();</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    BlogMapper mapper = session.getMapper(BlogMapper.class);</span><br><span class="line">    Blog blog = mapper.selectBlog(<span class="number">101</span>);</span><br><span class="line">&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">    session.close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>通过<code>SqlSessionFactory</code>打开一个<code>SqlSession</code>，首先我们去看下<code>SqlSession</code>接口的描述</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SqlSession用于处理MyBatis的主Java接口。</span><br><span class="line"></span><br><span class="line">通过此接口，您可以执行命令，获取映射器和管理事务。</span><br></pre></td></tr></table></figure>
-<p>SqlSession的方法都是常用的增删改查，事务的回滚提交，以及缓存等，该接口是MyBatis操作的核心。</p>
-<p>那我们去看下刚才代码中创建<code>DefaultSqlSessionFactory</code>实例是如何打开一个SqlSession</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> SqlSession <span class="title">openSessionFromDataSource</span><span class="params">(ExecutorType execType, TransactionIsolationLevel level, <span class="keyword">boolean</span> autoCommit)</span> </span>&#123;</span><br><span class="line">    Transaction tx = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">final</span> Environment environment = configuration.getEnvironment();</span><br><span class="line">        <span class="keyword">final</span> TransactionFactory transactionFactory = getTransactionFactoryFromEnvironment(environment);</span><br><span class="line">        tx = transactionFactory.newTransaction(environment.getDataSource(), level, autoCommit);</span><br><span class="line">        <span class="keyword">final</span> Executor executor = configuration.newExecutor(tx, execType);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> DefaultSqlSession(configuration, executor, autoCommit);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        closeTransaction(tx); </span><br><span class="line">        <span class="keyword">throw</span> ExceptionFactory.wrapException(<span class="string">"Error opening session.  Cause: "</span> + e, e);</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        ErrorContext.instance().reset();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>最后我们创建了一个<code>DefaultSqlSession</code>实例，并一起创建了一个<code>TransactionFactory</code>和<code>Executor</code>实例，也就是说每个SqlSession都持有这两个对象。</p>
-<p><code>ExcutorType</code>可以通过XML配置中的<code>setting</code>元素的<code>defaultExecutorType</code>来指定，如果没有指定会设置一个默认值默认的赋值，在方法<code>XMLConfigBuilder.settingsElement()</code>中可以找到对应的代码。</p>
-<p><code>TransactionFactory</code>是通过<code>Environment.getTransactionFactory()</code>方法获取的。它的赋值同样也是在xml中<code>transactionManager</code>来配置的。<code>Environment</code>的实例化可以在<code>XMLConfigBuilder.environmentsElement()</code>找到，根据提供的type来实例化<code>TransactionFactory</code>。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> TransactionFactory <span class="title">transactionManagerElement</span><span class="params">(XNode context)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (context != <span class="keyword">null</span>) &#123;</span><br><span class="line">        String type = context.getStringAttribute(<span class="string">"type"</span>);</span><br><span class="line">        Properties props = context.getChildrenAsProperties();</span><br><span class="line">        TransactionFactory factory = (TransactionFactory) resolveClass(type).newInstance();</span><br><span class="line">        factory.setProperties(props);</span><br><span class="line">        <span class="keyword">return</span> factory;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> BuilderException(<span class="string">"Environment declaration requires a TransactionFactory."</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>我们配置的值是<code>JDBC</code>，在<code>TypeAliasRegistry.resolveAlias</code>方法中解析到指定的类。</p>
-<p>其中使用的<code>TYPE_ALIASES</code>是一个<code>Map</code>，在<code>TypeAliasRegistry</code>的构造函数中已经初始化了一部分数据，但是我们并没有看到<code>JDBC</code>的key，我们在继续深入查看调用<code>TypeAliasRegistry.registerAlias</code>方法的地方，可以看到<code>Configuration</code>的构造函数中设置了该值：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">typeAliasRegistry.registerAlias(<span class="string">"JDBC"</span>, JdbcTransactionFactory.class);</span><br></pre></td></tr></table></figure>
-<p>所以上面<code>TransactionFactory</code>实例了一个<code>JdbcTransactionFactory</code>的对象，并根据数据源、事务隔离级别、是否自动提交事务，创建了一个<code>Transaction</code>实例，<code>Transaction</code>包装了数据库连接，处理连接生命周期，包括：创建，准备，提交/回滚和关闭。</p>
-<p>接下来创建了一个<code>Executor</code>：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Executor <span class="title">newExecutor</span><span class="params">(Transaction transaction, ExecutorType executorType)</span> </span>&#123;</span><br><span class="line">    executorType = executorType == <span class="keyword">null</span> ? defaultExecutorType : executorType;</span><br><span class="line">    executorType = executorType == <span class="keyword">null</span> ? ExecutorType.SIMPLE : executorType;</span><br><span class="line">    Executor executor;</span><br><span class="line">    <span class="keyword">if</span> (ExecutorType.BATCH == executorType) &#123;</span><br><span class="line">        executor = <span class="keyword">new</span> BatchExecutor(<span class="keyword">this</span>, transaction);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (ExecutorType.REUSE == executorType) &#123;</span><br><span class="line">        executor = <span class="keyword">new</span> ReuseExecutor(<span class="keyword">this</span>, transaction);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        executor = <span class="keyword">new</span> SimpleExecutor(<span class="keyword">this</span>, transaction);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (cacheEnabled) &#123;</span><br><span class="line">        executor = <span class="keyword">new</span> CachingExecutor(executor);</span><br><span class="line">    &#125;</span><br><span class="line">    executor = (Executor) interceptorChain.pluginAll(executor);</span><br><span class="line">    <span class="keyword">return</span> executor;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><code>cacheEnabled</code>可以通过xml中<code>settings.cacheEnabled</code>配置，默认为true，可以在<code>XMLConfigBuilder.settingsElement</code>方法中找到相应代码：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">configuration.setCacheEnabled(booleanValueOf(props.getProperty("cacheEnabled"), true));</span><br></pre></td></tr></table></figure>
-<p>创建了一个<code>CachingExecutor</code>实例。最后将三个参数组合创建了一个<code>DefaultSqlSession</code>实例。</p>
-<p>然后我们就走到真正的查询是怎么进行的了，那我们继续看代码，我们找一个最简单的<code>selectOne</code>去看下。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> &lt;E&gt; <span class="function">List&lt;E&gt; <span class="title">selectList</span><span class="params">(String statement, Object parameter, RowBounds rowBounds)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        MappedStatement ms = configuration.getMappedStatement(statement);</span><br><span class="line">        <span class="keyword">return</span> executor.query(ms, wrapCollection(parameter), rowBounds, Executor.NO_RESULT_HANDLER);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        <span class="keyword">throw</span> ExceptionFactory.wrapException(<span class="string">"Error querying database.  Cause: "</span> + e, e);</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        ErrorContext.instance().reset();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><code>MappedStatement</code>是读取在xml中配置的Mapper信息，然后解析里面的insert/update/delete/select语句创建的实例。具体实现代码可以在<code>XMLConfigBuilder.parseConfiguration()</code>方法中找到。<code>executor</code>我们在上面提到是创建的<code>CachingExecutor</code>实例，所以代码走到该类的<code>query</code>方法。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> &lt;E&gt; <span class="function">List&lt;E&gt; <span class="title">query</span><span class="params">(MappedStatement ms, Object parameterObject, RowBounds rowBounds, ResultHandler resultHandler, CacheKey key, BoundSql boundSql)</span></span></span><br><span class="line"><span class="function">            <span class="keyword">throws</span> SQLException </span>&#123;</span><br><span class="line">    Cache cache = ms.getCache();</span><br><span class="line">    <span class="keyword">if</span> (cache != <span class="keyword">null</span>) &#123;</span><br><span class="line">        flushCacheIfRequired(ms);</span><br><span class="line">        <span class="keyword">if</span> (ms.isUseCache() &amp;&amp; resultHandler == <span class="keyword">null</span>) &#123;</span><br><span class="line">            ensureNoOutParams(ms, boundSql);</span><br><span class="line">            <span class="meta">@SuppressWarnings</span>(<span class="string">"unchecked"</span>)</span><br><span class="line">            List&lt;E&gt; list = (List&lt;E&gt;) tcm.getObject(cache, key);</span><br><span class="line">            <span class="keyword">if</span> (list == <span class="keyword">null</span>) &#123;</span><br><span class="line">                list = delegate.&lt;E&gt;query(ms, parameterObject, rowBounds, resultHandler, key, boundSql);</span><br><span class="line">                tcm.putObject(cache, key, list); <span class="comment">// issue #578 and #116</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> list;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> delegate.&lt;E&gt;query(ms, parameterObject, rowBounds, resultHandler, key, boundSql);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>我们可以看到，代码先去查找<code>MappedStatement</code>对应的缓存，如果找不到缓存会委派到具体的具体的类去查询，可以进入<code>BaseExecutor</code>的query方法，首先他也会查询缓存，这个缓存是<code>SqlSession</code>的本地缓存，如果没有缓存才会从数据库去查找。</p>
-<p>至此，一个sql的执行的主流程就到此结束了。</p>
+        <h1 id="class文件格式"><a href="#class文件格式" class="headerlink" title="class文件格式"></a>class文件格式</h1><p>由Java虚拟机执行的编译代码使用独立于硬件和操作系统的二进制格式表示，通常（但不一定）存储在文件中，称为类文件格式。类文件格式精确定义了类或接口的表示形式，包括可能以特定于平台的目标文件格式获取的字节顺序等详细信息。</p>
+<h1 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h1><p>JVM有两种类型，<code>primitive type</code>和<code>reference type</code>。<br><a id="more"></a></p>
+<h2 id="primitive-type"><a href="#primitive-type" class="headerlink" title="primitive type"></a>primitive type</h2><p>primitive type分为numeric types、boolean type 和returnAddress type。</p>
+<h3 id="numeric-types"><a href="#numeric-types" class="headerlink" title="numeric types"></a>numeric types</h3><p><code>numeric type</code>包含<code>integral types</code>和<code>floating-point types</code>。</p>
+<p>intergral types: byte、short、int、long、char。</p>
+<p>floating-point types: float、double。</p>
+<h3 id="boolean-type"><a href="#boolean-type" class="headerlink" title="boolean type"></a>boolean type</h3><p>没有Java虚拟机指令专门用于boolean值的操作。操作boolean值得Java表达式被编译为使用JVM int数据类型的值。</p>
+<p>JVM直接支持boolean数组。<code>newarray</code>指令允许创建一个boolean数组。boolean类型的数组使用byte数组指令<code>baload</code>和<code>bastore</code>访问和修改。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">在Oracle JVM实现中，java编程语言中的boolean数组被编码为JVM byte数组，每个boolean元素使用8个字节。</span><br></pre></td></tr></table></figure>
+<p>JVM编码boolean数组使用1标识true、0标识false。</p>
+<h3 id="returnAddress类型"><a href="#returnAddress类型" class="headerlink" title="returnAddress类型"></a>returnAddress类型</h3><p>returnAddress类型被JVM中<code>jsr</code>,<code>ret</code>,<code>jsr_w</code>指令使用。returnAddress类型的值是指向Java虚拟机指令操作码的指针。returnAddress不对应任何Java编程语言类型，并且不能由运行程序修改。</p>
+<h2 id="reference-type"><a href="#reference-type" class="headerlink" title="reference type"></a>reference type</h2><p>有三种类型的reference types: class type，array type和interface type。</p>
+<h1 id="运行时数据区"><a href="#运行时数据区" class="headerlink" title="运行时数据区"></a>运行时数据区</h1><h2 id="pc寄存器-PC-Register"><a href="#pc寄存器-PC-Register" class="headerlink" title="pc寄存器(PC Register)"></a>pc寄存器(PC Register)</h2><p>JVM支持多线程同时执行。每个JVM线程都有一个自己的pc(program counter) register。如果非本地方法(native)，pc寄存器包含当前正在执行的Java虚拟机指令的地址。如果本地找方法，JVM pc寄存器的值是#未定义的。pc寄存器的值足够容纳returnAddress或特定平台的本地指针。</p>
+<h2 id="栈-Stack"><a href="#栈-Stack" class="headerlink" title="栈(Stack)"></a>栈(Stack)</h2><p>每个JVM线程都有一个私有的JVM栈，跟线程一起创建。JVM存储帧，它持有局部变量和部分结果，并在方法调用和返回中起作用。由于除了推送和弹出帧之外，永远不会直接操作Java虚拟机堆栈，因此帧可能是堆分配。JVM栈内存不必是连续的。</p>
+<p>JVM栈可能出现的异常：</p>
+<ul>
+<li>如果线程中的计算需要比允许更大的JVM栈空间，JVM抛出<code>StackOverflowError</code>。</li>
+<li>如果JVM栈可以动态的扩展，当内存不足时抛出<code>OutOfMemoryError</code></li>
+</ul>
+<h2 id="堆-Heap"><a href="#堆-Heap" class="headerlink" title="堆(Heap)"></a>堆(Heap)</h2><p>JVM堆可以被所有JVM线程共享。堆是运行时数据区，从中分配所有类实例和数组的内存。</p>
+<h2 id="方法区-Method-Area"><a href="#方法区-Method-Area" class="headerlink" title="方法区(Method Area)"></a>方法区(Method Area)</h2><p>JVM方法区被所有JVM线程共享。它存储每类结构，例如运行时常量池，字段和方法数据，以及方法和构造函数的代码，包括类和实例初始化以及接口初始化中使用的特殊方法。方法区在虚拟机启动时创建。</p>
+<h2 id="运行时常量池-Run-Time-Constant-Pool"><a href="#运行时常量池-Run-Time-Constant-Pool" class="headerlink" title="运行时常量池(Run-Time Constant Pool)"></a>运行时常量池(Run-Time Constant Pool)</h2><p>运行时常量池是类文件中constant_pool表的每类或每接口运行时表示。它包含几种常量，从编译时已知的数字字面量到必须在运行时解析的方法和字段引用。</p>
+<p>每个运行时常量池都是从Java虚拟机的方法区域分配的。当Java虚拟机创建类或接口时，将构造类或接口的运行时常量池。</p>
+<h2 id="本地方法栈-Native-Method-Stacks"><a href="#本地方法栈-Native-Method-Stacks" class="headerlink" title="本地方法栈(Native Method Stacks)"></a>本地方法栈(Native Method Stacks)</h2><p>JVM使用传统栈俗称C栈，以支持本地方法。</p>
+<h1 id="帧（Frame"><a href="#帧（Frame" class="headerlink" title="帧（Frame)"></a>帧（Frame)</h1><p>帧用于存储数据和部分结果，以及执行动态链接、方法的返回值和派发(dispatch)异常。</p>
+<p>每次方法执行时创建一个新的帧。当方法执行完成时帧销毁，不管是正常完成或是抛出一个未捕获的异常。帧在线程的栈中创建。每一个帧都有它自己局部变量数组，操作数栈，对当前方法类的运行时常量池的引用。局部变量数组和操作数堆栈的大小在编译时确定。</p>
+<p>调用方法时，会创建一个新帧，并在控制转移到新方法时变为当前帧。在方法返回时，当前帧将其方法调用的结果（如果有）传递回前一帧，然后被丢弃。</p>
+<h2 id="局部变量"><a href="#局部变量" class="headerlink" title="局部变量"></a>局部变量</h2><p>每个帧包含一个称为局部变量的变量数组。帧的局部变量数组长度在编译期间确定。一个局部变量可以持有boolean，byte，char，short，int，float，reference或returnAddress的值。一对局部变量可以持有long和double值。</p>
+<p>通过索引来解决局部变量。第一个局部变量的索引是0.</p>
+<p>Java虚拟机使用局部变量在方法调用上传递参数。在类方法调用中，任何参数都在从局部变量0开始的连续局部变量中传递。在实例方法调用中，局部变量0始终用于传递对调用实例方法的对象的引用（Java编程语言中的this）。随后，任何参数都在从局部变量1开始的连续局部变量中传递。</p>
+<h2 id="操作数栈-Operand-Stacks"><a href="#操作数栈-Operand-Stacks" class="headerlink" title="操作数栈(Operand Stacks)"></a>操作数栈(Operand Stacks)</h2><p>每个帧包含一个称为操作数栈的LIFO栈。操作数堆栈的最大深度在编译时确定。</p>
+<p>当创建包含它的帧时，操作数堆栈为空。JVM提供指令以将局部变量或字段中的常量或值加载到操作数堆栈上。其他JVM指令从操作数堆栈获取操作数，对它们进行操作，并将结果推回操作数堆栈。操作数堆栈还用于准备要传递给方法和接收方法结果的参数。</p>
+<h2 id="动态链接-Dynamic-Linking"><a href="#动态链接-Dynamic-Linking" class="headerlink" title="动态链接(Dynamic Linking)"></a>动态链接(Dynamic Linking)</h2><p>每个帧包含对运行时常量池的引用，该引用用于支持方法代码的动态链接的当前方法的类型。</p>
 
       
     </div>
@@ -601,7 +603,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/mybatis/" rel="tag"># mybatis</a>
+            <a href="/tags/jvm/" rel="tag"># jvm</a>
           
         </div>
       
@@ -614,8 +616,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/09/25/structure-of-jvm/" rel="next" title="JVMS8 - Java虚拟机的结构">
-                <i class="fa fa-chevron-left"></i> JVMS8 - Java虚拟机的结构
+              <a href="/2018/03/15/Innodb-Transaction-Model/" rel="next" title="InnoDB锁和事务模型 —— 事务模型">
+                <i class="fa fa-chevron-left"></i> InnoDB锁和事务模型 —— 事务模型
               </a>
             
           </div>
@@ -623,6 +625,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/01/mybatis-source-code/" rel="prev" title="MyBatis源码分析">
+                MyBatis源码分析 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -670,8 +676,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -846,6 +861,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#class文件格式"><span class="nav-number">1.</span> <span class="nav-text">class文件格式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据类型"><span class="nav-number">2.</span> <span class="nav-text">数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#primitive-type"><span class="nav-number">2.1.</span> <span class="nav-text">primitive type</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#numeric-types"><span class="nav-number">2.1.1.</span> <span class="nav-text">numeric types</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#boolean-type"><span class="nav-number">2.1.2.</span> <span class="nav-text">boolean type</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#returnAddress类型"><span class="nav-number">2.1.3.</span> <span class="nav-text">returnAddress类型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference-type"><span class="nav-number">2.2.</span> <span class="nav-text">reference type</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#运行时数据区"><span class="nav-number">3.</span> <span class="nav-text">运行时数据区</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#pc寄存器-PC-Register"><span class="nav-number">3.1.</span> <span class="nav-text">pc寄存器(PC Register)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#栈-Stack"><span class="nav-number">3.2.</span> <span class="nav-text">栈(Stack)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#堆-Heap"><span class="nav-number">3.3.</span> <span class="nav-text">堆(Heap)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法区-Method-Area"><span class="nav-number">3.4.</span> <span class="nav-text">方法区(Method Area)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运行时常量池-Run-Time-Constant-Pool"><span class="nav-number">3.5.</span> <span class="nav-text">运行时常量池(Run-Time Constant Pool)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#本地方法栈-Native-Method-Stacks"><span class="nav-number">3.6.</span> <span class="nav-text">本地方法栈(Native Method Stacks)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#帧（Frame"><span class="nav-number">4.</span> <span class="nav-text">帧（Frame)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#局部变量"><span class="nav-number">4.1.</span> <span class="nav-text">局部变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#操作数栈-Operand-Stacks"><span class="nav-number">4.2.</span> <span class="nav-text">操作数栈(Operand Stacks)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动态链接-Dynamic-Linking"><span class="nav-number">4.3.</span> <span class="nav-text">动态链接(Dynamic Linking)</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
