@@ -152,18 +152,18 @@
 
 
 
-  <meta name="description" content="MyBatis为一个系列，深入分析MyBatis代码。本篇我们先大体的看下MyBatis整个的执行流程，对MyBatis整体有个了解，后面我们在找几个主题深入的去讨论，比如缓存、连接池等，最终通过MyBatis系列，希望对你有所帮助，那么我们开始吧！  首先每一个框架都会有一个入口，让我们可以很容易的拿来即用，我们同样可以沿着入口，了解这个框架的整体流程，然后在深扒底层的原理细节。MyBatis">
+  <meta name="description" content="MyBatis源码分析是一个系列，旨在深入充分了解MyBatis执行流程以及原理。本篇我们先大体的看下MyBatis整个的执行流程，对MyBatis整体有个了解，然后我们在找几个主题深入的去讨论，比如缓存、连接池等，希望通过MyBatis系列，对你有所帮助，那么我们开始吧！  首先每一个框架都会有一个入口，让我们可以很容易的拿来即用，同样也可以沿着入口，了解这个框架的整体流程，然后在深扒底层的原">
 <meta name="keywords" content="mybatis">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MyBatis源码分析">
 <meta property="og:url" content="http://blog.finegames.cn/2018/05/01/mybatis-source-code/index.html">
 <meta property="og:site_name" content="Be the best version of you">
-<meta property="og:description" content="MyBatis为一个系列，深入分析MyBatis代码。本篇我们先大体的看下MyBatis整个的执行流程，对MyBatis整体有个了解，后面我们在找几个主题深入的去讨论，比如缓存、连接池等，最终通过MyBatis系列，希望对你有所帮助，那么我们开始吧！  首先每一个框架都会有一个入口，让我们可以很容易的拿来即用，我们同样可以沿着入口，了解这个框架的整体流程，然后在深扒底层的原理细节。MyBatis">
+<meta property="og:description" content="MyBatis源码分析是一个系列，旨在深入充分了解MyBatis执行流程以及原理。本篇我们先大体的看下MyBatis整个的执行流程，对MyBatis整体有个了解，然后我们在找几个主题深入的去讨论，比如缓存、连接池等，希望通过MyBatis系列，对你有所帮助，那么我们开始吧！  首先每一个框架都会有一个入口，让我们可以很容易的拿来即用，同样也可以沿着入口，了解这个框架的整体流程，然后在深扒底层的原">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-09-26T12:52:01.751Z">
+<meta property="og:updated_time" content="2018-09-27T02:55:18.427Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MyBatis源码分析">
-<meta name="twitter:description" content="MyBatis为一个系列，深入分析MyBatis代码。本篇我们先大体的看下MyBatis整个的执行流程，对MyBatis整体有个了解，后面我们在找几个主题深入的去讨论，比如缓存、连接池等，最终通过MyBatis系列，希望对你有所帮助，那么我们开始吧！  首先每一个框架都会有一个入口，让我们可以很容易的拿来即用，我们同样可以沿着入口，了解这个框架的整体流程，然后在深扒底层的原理细节。MyBatis">
+<meta name="twitter:description" content="MyBatis源码分析是一个系列，旨在深入充分了解MyBatis执行流程以及原理。本篇我们先大体的看下MyBatis整个的执行流程，对MyBatis整体有个了解，然后我们在找几个主题深入的去讨论，比如缓存、连接池等，希望通过MyBatis系列，对你有所帮助，那么我们开始吧！  首先每一个框架都会有一个入口，让我们可以很容易的拿来即用，同样也可以沿着入口，了解这个框架的整体流程，然后在深扒底层的原">
 
 
 
@@ -449,7 +449,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-09-26 20:52:01" itemprop="dateModified" datetime="2018-09-26T20:52:01+08:00">2018-09-26</time>
+                <time title="修改时间：2018-09-27 10:55:18" itemprop="dateModified" datetime="2018-09-27T10:55:18+08:00">2018-09-27</time>
               
             
           </span>
@@ -466,7 +466,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/源码/" itemprop="url" rel="index"><span itemprop="name">源码</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/MyBatis/" itemprop="url" rel="index"><span itemprop="name">MyBatis</span></a></span>
 
                 
                 
@@ -522,13 +522,12 @@
 
       
         <blockquote>
-<p>MyBatis为一个系列，深入分析MyBatis代码。本篇我们先大体的看下MyBatis整个的执行流程，对MyBatis整体有个了解，后面我们在找几个主题深入的去讨论，比如缓存、连接池等，最终通过MyBatis系列，希望对你有所帮助，那么我们开始吧！</p>
+<p>MyBatis源码分析是一个系列，旨在深入充分了解MyBatis执行流程以及原理。本篇我们先大体的看下MyBatis整个的执行流程，对MyBatis整体有个了解，然后我们在找几个主题深入的去讨论，比如缓存、连接池等，希望通过MyBatis系列，对你有所帮助，那么我们开始吧！</p>
 </blockquote>
-<p>首先每一个框架都会有一个入口，让我们可以很容易的拿来即用，我们同样可以沿着入口，了解这个框架的整体流程，然后在深扒底层的原理细节。<a href="http://www.mybatis.org/mybatis-3/zh/index.html" target="_blank" rel="noopener">MyBatis官网</a>提供给我们如何在项目中使用它。<br><a id="more"></a><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">String resource = <span class="string">"org/mybatis/example/mybatis-config.xml"</span>;</span><br><span class="line">InputStream inputStream = Resources.getResourceAsStream(resource);</span><br><span class="line">SqlSessionFactory sqlSessionFactory = <span class="keyword">new</span> SqlSessionFactoryBuilder().build(inputStream);</span><br></pre></td></tr></table></figure></p>
-<p>上面代码中创建了一个<code>SqlSessionFactory</code>，也就是MyBatis的入口。它的主要功能就是创建<code>SqlSession</code>。</p>
+<p>首先每一个框架都会有一个入口，让我们可以很容易的拿来即用，同样也可以沿着入口，了解这个框架的整体流程，然后在深扒底层的原理细节。<a href="http://www.mybatis.org/mybatis-3/zh/index.html" target="_blank" rel="noopener">MyBatis官网</a>提供给我们如何在项目中使用它。<br><a id="more"></a><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">String resource = <span class="string">"org/mybatis/example/mybatis-config.xml"</span>;</span><br><span class="line">InputStream inputStream = Resources.getResourceAsStream(resource);</span><br><span class="line">SqlSessionFactory sqlSessionFactory = <span class="keyword">new</span> SqlSessionFactoryBuilder().build(inputStream);</span><br><span class="line"></span><br><span class="line">SqlSession session = sqlSessionFactory.openSession();</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    BlogMapper mapper = session.getMapper(BlogMapper.class);</span><br><span class="line">    Blog blog = mapper.selectBlog(<span class="number">101</span>);</span><br><span class="line">&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">    session.close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>上述代码是一个典型的MyBatis查询语句，那我们从这几句话开始我们的分析。</p>
+<p>首先创建了一个<code>SqlSessionFactory</code>，也就是MyBatis的入口。它的主要功能就是创建<code>SqlSession</code>。</p>
 <p>在<code>SqlSessionFactyoryBuilder</code>类中根据提供的XML配置，创建了一个<code>DefaultSqlSessionFactory</code>的实例<code></code></p>
-<p>如果要使用MyBatis进行查询，官网给了我们对应的例子。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">SqlSession session = sqlSessionFactory.openSession();</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    BlogMapper mapper = session.getMapper(BlogMapper.class);</span><br><span class="line">    Blog blog = mapper.selectBlog(<span class="number">101</span>);</span><br><span class="line">&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">    session.close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>通过<code>SqlSessionFactory</code>打开一个<code>SqlSession</code>，首先我们去看下<code>SqlSession</code>接口的描述</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SqlSession用于处理MyBatis的主Java接口。</span><br><span class="line"></span><br><span class="line">通过此接口，您可以执行命令，获取映射器和管理事务。</span><br></pre></td></tr></table></figure>
 <p>SqlSession的方法都是常用的增删改查，事务的回滚提交，以及缓存等，该接口是MyBatis操作的核心。</p>
@@ -625,8 +624,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/06/13/ali-nonuse-zk/" rel="prev" title="(转载）阿里巴巴为什么不用 ZooKeeper 做服务发现？">
-                (转载）阿里巴巴为什么不用 ZooKeeper 做服务发现？ <i class="fa fa-chevron-right"></i>
+              <a href="/2018/05/05/mybatis-cache/" rel="prev" title="MyBatis缓存机制">
+                MyBatis缓存机制 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -695,7 +694,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">20</span>
+                    <span class="site-state-item-count">21</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -811,7 +810,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">28</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">30</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
