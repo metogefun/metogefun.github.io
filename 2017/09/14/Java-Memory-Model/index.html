@@ -167,7 +167,7 @@
 <meta property="og:image" content="http://blog.finegames.cn/2017/09/14/java-memory-model/java-memory-model-5.png">
 <meta property="og:image" content="http://blog.finegames.cn/2017/09/14/java-memory-model/java-memory-model-6.png">
 <meta property="og:image" content="http://blog.finegames.cn/2017/09/14/java-memory-model/java-memory-model-6.png">
-<meta property="og:updated_time" content="2018-09-26T13:10:51.193Z">
+<meta property="og:updated_time" content="2018-10-08T03:58:26.840Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java内存模型">
 <meta name="twitter:description" content="Java内存模型指定Java虚拟机如何与计算机的内存（RAM）一起工作。Java虚拟机是整个计算机的模型，因此该模型自然包括一个内存模型 - 也就是Java内存模型。 如果要设计正确的并发程序，了解Java内存模型非常重要。Java内存模型指定不同线程如何以及何时可以看到其他线程写入共享变量的值，以及如何在必要时同步对共享变量的访问。原始Java内存模型不足，因此Java内存模型在Java 1.5">
@@ -457,7 +457,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-09-26 21:10:51" itemprop="dateModified" datetime="2018-09-26T21:10:51+08:00">2018-09-26</time>
+                <time title="修改时间：2018-10-08 11:58:26" itemprop="dateModified" datetime="2018-10-08T11:58:26+08:00">2018-10-08</time>
               
             
           </span>
@@ -531,9 +531,7 @@
       
         <p>Java内存模型指定Java虚拟机如何与计算机的内存（RAM）一起工作。Java虚拟机是整个计算机的模型，因此该模型自然包括一个内存模型 - 也就是Java内存模型。</p>
 <p>如果要设计正确的并发程序，了解Java内存模型非常重要。Java内存模型指定不同线程如何以及何时可以看到其他线程写入共享变量的值，以及如何在必要时同步对共享变量的访问。原始Java内存模型不足，因此Java内存模型在Java 1.5中进行了修订。 此版本的Java内存模型仍在Java 8中使用。</p>
-<h1 id="JVM的内部"><a href="#JVM的内部" class="headerlink" title="JVM的内部"></a>JVM的内部</h1><p>JVM内部使用的Java内存模型在线程堆栈和堆之间划分内存。下图从逻辑角度说明了Java内存模型：</p>
-<img src="/2017/09/14/java-memory-model/java-memory-model-1.png" title="java memeory model">
-<a id="more"></a>
+<h1 id="JVM的内部"><a href="#JVM的内部" class="headerlink" title="JVM的内部"></a>JVM的内部</h1><p>JVM内部使用的Java内存模型在线程堆栈和堆之间划分内存。下图从逻辑角度说明了Java内存模型：<br><a id="more"></a><br><img src="/2017/09/14/java-memory-model/java-memory-model-1.png" title="java memeory model"></p>
 <p>在Java虚拟机中运行的每个线程都有自己的线程堆栈。线程堆栈包含有关线程调用哪些方法以达到当前执行点的信息。我将其称为“调用堆栈”。当线程执行其代码时，调用堆栈会发生变化。</p>
 <p>线程堆栈还包含正在执行的每个方法的所有局部变量（调用堆栈上的所有方法）。线程只能访问它自己的线程堆栈。由线程创建的局部变量对于除创建它的线程之外的所有其他线程是不可见的。即使两个线程正在执行完全相同的代码，两个线程仍将在每个自己的线程堆栈中创建该代码的局部变量。因此，每个线程都有自己的每个局部变量的版本。原始类型的所有局部变量（boolean，byte，short，char，int，long，float，double）完全存储在线程堆栈中，因此对其他线程不可见。一个线程可以将一个原始变量的副本传递给另一个线程，但它不能共享原始局部变量本身。</p>
 <p>堆包含在Java应用程序中创建的所有对象，无论创建该对象的线程是什么。包括原始类型的对象版本（例如Byte，Integer，Long等）。无论是创建对象并将其分配给局部变量，还是创建为另一个对象的成员变量，该对象仍然存储在堆上。下面的图表说明了存储在线程堆栈上的调用堆栈和局部变量，以及存储在堆上的对象：</p>
@@ -652,6 +650,10 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2017/08/12/aqs-readwritelock/" rel="next" title="深入理解AQS - ReadWriteLock实现">
+                <i class="fa fa-chevron-left"></i> 深入理解AQS - ReadWriteLock实现
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
@@ -737,7 +739,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">21</span>
+                    <span class="site-state-item-count">23</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -780,7 +782,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">15</span>
+                      
+                    
+                    <span class="site-state-item-count">16</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -792,6 +796,10 @@
                 <div class="site-state-item site-state-tags">
                   <a href="/tags/index.html">
                     
+                    
+                      
+                    
+                      
                     
                       
                     
