@@ -152,24 +152,25 @@
 
 
 
-  <meta name="description" content="We must accept finite disappointment, but we must never lose infinite hope.">
-<meta name="keywords" content="Java JVM 架构 高可用">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Be the best version of you">
-<meta property="og:url" content="http://blog.finegames.cn/tags/exception/index.html">
+  <meta name="description" content="什么是内存模型在多处理器系统中，处理器通常具有一层或多层存储器高速缓存，这通过加速对数据的访问（因为数据更接近处理器）和减少共享存储器总线上的流量来提高性能（因为可以满足许多存储器操作通过本地缓存）。内存缓存可以极大地提高性能，但它们带来了许多新的挑战。例如，当两个处理器同时检查相同的内存位置时会发生什么？ 在什么条件下他们会看到相同的值？ 在处理器级别，存储器模型定义了必要且充分的条件，用于知道">
+<meta name="keywords" content="java memeory model">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JSR 133 Java Memory Model 常见问题解答">
+<meta property="og:url" content="http://blog.finegames.cn/2017/10/11/java-memory-model-1/index.html">
 <meta property="og:site_name" content="Be the best version of you">
-<meta property="og:description" content="We must accept finite disappointment, but we must never lose infinite hope.">
+<meta property="og:description" content="什么是内存模型在多处理器系统中，处理器通常具有一层或多层存储器高速缓存，这通过加速对数据的访问（因为数据更接近处理器）和减少共享存储器总线上的流量来提高性能（因为可以满足许多存储器操作通过本地缓存）。内存缓存可以极大地提高性能，但它们带来了许多新的挑战。例如，当两个处理器同时检查相同的内存位置时会发生什么？ 在什么条件下他们会看到相同的值？ 在处理器级别，存储器模型定义了必要且充分的条件，用于知道">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-10-13T13:55:32.706Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Be the best version of you">
-<meta name="twitter:description" content="We must accept finite disappointment, but we must never lose infinite hope.">
+<meta name="twitter:title" content="JSR 133 Java Memory Model 常见问题解答">
+<meta name="twitter:description" content="什么是内存模型在多处理器系统中，处理器通常具有一层或多层存储器高速缓存，这通过加速对数据的访问（因为数据更接近处理器）和减少共享存储器总线上的流量来提高性能（因为可以满足许多存储器操作通过本地缓存）。内存缓存可以极大地提高性能，但它们带来了许多新的挑战。例如，当两个处理器同时检查相同的内存位置时会发生什么？ 在什么条件下他们会看到相同的值？ 在处理器级别，存储器模型定义了必要且充分的条件，用于知道">
 
 
 
 
 
 
-  <link rel="canonical" href="http://blog.finegames.cn/tags/exception/"/>
+  <link rel="canonical" href="http://blog.finegames.cn/2017/10/11/java-memory-model-1/"/>
 
 
 
@@ -179,7 +180,7 @@
   };
 </script>
 
-  <title>标签: exception | Be the best version of you</title>
+  <title>JSR 133 Java Memory Model 常见问题解答 | Be the best version of you</title>
   
 
 
@@ -236,7 +237,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -289,7 +290,7 @@
         
         
           
-          <li class="menu-item menu-item-tags menu-item-active">
+          <li class="menu-item menu-item-tags">
     <a href="/tags/" rel="section">
       <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
   </li>
@@ -369,84 +370,286 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>exception<small>标签</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
+
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.finegames.cn/2017/10/11/java-memory-model-1/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王召辉">
+      <meta itemprop="description" content="We must accept finite disappointment, but we must never lose infinite hope.">
+      <meta itemprop="image" content="/images/header.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Be the best version of you">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2017/10/30/redis-exception/" itemprop="url">
-              
-                <span itemprop="name">redis异常汇总</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">JSR 133 Java Memory Model 常见问题解答
+              
+            
+          </h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-10-30T20:24:25+08:00"
-              content="2017-10-30" >
-          10-30
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
 
-    </header>
-  </article>
+            
+            
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-10-11 14:39:19" itemprop="dateCreated datePublished" datetime="2017-10-11T14:39:19+08:00">2017-10-11</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-10-13 21:55:32" itemprop="dateModified" datetime="2018-10-13T21:55:32+08:00">2018-10-13</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/10/11/java-memory-model-1/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2017/10/11/java-memory-model-1/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2017/10/11/java-memory-model-1/" class="leancloud_visitors" data-flag-title="JSR 133 Java Memory Model 常见问题解答">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="什么是内存模型"><a href="#什么是内存模型" class="headerlink" title="什么是内存模型"></a>什么是内存模型</h1><p>在多处理器系统中，处理器通常具有一层或多层存储器高速缓存，这通过加速对数据的访问（因为数据更接近处理器）和减少共享存储器总线上的流量来提高性能（因为可以满足许多存储器操作通过本地缓存）。内存缓存可以极大地提高性能，但它们带来了许多新的挑战。例如，当两个处理器同时检查相同的内存位置时会发生什么？ 在什么条件下他们会看到相同的值？</p>
+<p>在处理器级别，存储器模型定义了必要且充分的条件，用于知道当前处理器对其他处理器的存储器写入是可见的，并且当前处理器的写入对于其他处理器是可见的。某些处理器表现出强大的内存模型，其中所有处理器始终看到任何给定内存位置的完全相同的值。其他处理器表现出较弱的内存模型，其中需要特殊指令（称为内存屏障）来刷新或使本地处理器高速缓存无效，以便查看其他处理器进行的写入或使该处理器的写入对其他处理器可见。这些内存屏障通常在执行锁定和解锁操作时执行; 对于高级语言的程序员来说，它们是不可见的。</p>
+<p>由于减少了对内存屏障的需求，有时可以更容易为强内存模型编写程序。然而，即使在一些最强大的内存模型上，通常也需要内存屏障; 很多时候他们的位置是违反直觉的。处理器设计的最新趋势鼓励了较弱的内存模型，因为它们对高速缓存一致性的放松允许跨多个处理器和较大内存量的更大可伸缩性。</p>
+<p>当一个写对另一个线程可见时，编译器重新排序代码的问题就变得复杂了。例如，编译器可能会决定稍后在程序中移动写操作更有效; 只要此代码动作不会改变程序的语义，就可以自由地执行此操作。如果编译器推迟操作，则另一个线程在执行之前不会看到它; 这反映了缓存的效果。此外，可以在程序中更早地移动对存储器的写入; 在这种情况下，其他线程可能会在程序实际“发生”之前看到写入。所有这些灵活性都是通过设计 - 通过为编译器，运行时或硬件提供以最佳顺序执行操作的灵活性，在内存模型的范围内，我们可以实现更高的性能。</p>
+<p>以下代码中可以看到一个简单的示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Reordering</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> x = <span class="number">0</span>, y = <span class="number">0</span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">writer</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        x = <span class="number">1</span>;</span><br><span class="line">        y = <span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">reader</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> r1 = y;</span><br><span class="line">        <span class="keyword">int</span> r2 = x;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>假设这个代码同时在两个线程中执行，并且y的读取看到值2。因为这个写入在写入x之后，程序员可能会认为读取x必须看到值1。但是，写入可能已经重新排序。如果发生这种情况，则可能会发生对y的写入，可能会读取两个变量，然后可能会发生对x的写入。结果是r1的值为2，但r2的值为0。</p>
+<p>Java内存模型描述了多线程代码中哪些行为是合法的，以及线程如何通过内存进行交互。它描述了程序中变量之间的关系，以及在真实计算机系统中存储和检索它们与存储器或寄存器之间的低级细节。它以一种可以使用各种硬件和各种编译器优化正确实现的方式实现。</p>
+<p>Java包括几种语言结构，包括volatile，final和synchronized，它们旨在帮助程序员描述程序对编译器的并发性要求。Java内存模型定义了volatile和synchronized的行为，更重要的是，确保正确同步的Java程序在所有处理器体系结构上正确运行。</p>
+<h1 id="其他语言，比如C-，有内存模型吗？"><a href="#其他语言，比如C-，有内存模型吗？" class="headerlink" title="其他语言，比如C ++，有内存模型吗？"></a>其他语言，比如C ++，有内存模型吗？</h1><p>大多数其他编程语言（如C和C ++）的设计并未直接支持多线程。这些语言针对编译器和体系结构中发生的各种重新排序提供的保护在很大程度上取决于所使用的线程库（例如pthread），所使用的编译器以及运行代码的平台所提供的保证。</p>
+<h1 id="什么是JSR-133？"><a href="#什么是JSR-133？" class="headerlink" title="什么是JSR 133？"></a>什么是JSR 133？</h1><p>自1997年以来，在Java语言规范的第17章中定义的Java内存模型中发现了几个严重的缺陷。这些缺陷允许混淆行为（例如观察到final字段改变其值）并破坏编译器执行常见优化的能力。</p>
+<p>Java内存模型是一项雄心勃勃的事业; 这是编程语言规范第一次尝试合并一个内存模型，该内存模型可以为各种体系结构的并发提供一致的语义。不幸的是，定义一致且直观的内存模型证明比预期困难得多。不幸的是，定义一致且直观的内存模型证明比预期困难得多。JSR 133为Java语言定义了一个新的内存模型，它修复了早期内存模型的缺陷。为了做到这一点，需要改变final和volatile的语义。</p>
+<p>完整的语义可以在<a href="http://www.cs.umd.edu/users/pugh/java/memoryModel上找到，但是正式的语义并不适合胆小的人。令人惊讶和发人深省的是，发现像同步一样复杂的看似简单的概念。幸运的是，您无需了解形式语义的细节" target="_blank" rel="noopener">http://www.cs.umd.edu/users/pugh/java/memoryModel上找到，但是正式的语义并不适合胆小的人。令人惊讶和发人深省的是，发现像同步一样复杂的看似简单的概念。幸运的是，您无需了解形式语义的细节</a> - JSR 133的目标是创建一组形式语义，为volatile，synchronized和final工作提供直观的框架。</p>
+<p>JSR 133的目标包括：</p>
+<ul>
+<li>保持现有的安全保障，如类型安全，并加强其他安全保障。例如，变量值可能不会“凭空”创建：某个线程观察到的变量的每个值必须是某个线程可以合理放置的值。</li>
+<li>正确同步程序的语义应尽可能简单直观。</li>
+<li>应定义不完全或不正确同步程序的语义，以便最大限度地减少潜在的安全隐患。</li>
+<li>程序员应该能够自信地说明多线程程序如何与内存交互。</li>
+<li>应该可以在广泛的流行硬件架构中设计正确，高性能的JVM实现。</li>
+<li>应提供初始化安全性的新保证。如果正确构造了一个对象（这意味着对它的引用在构造期间不会被转义），那么看到对该对象的引用的所有线程也将看到在构造函数中设置的最终字段的值，而不需要同步。</li>
+<li>对现有代码的影响应该是最小的。</li>
+</ul>
+<h1 id="重排序是什么意思？"><a href="#重排序是什么意思？" class="headerlink" title="重排序是什么意思？"></a>重排序是什么意思？</h1><p>在许多情况下，对程序变量（对象实例字段，类静态字段和数组元素）的访问可能看起来以与程序指定的顺序不同的顺序执行。编译器可以自由地使用优化名称中的指令顺序。处理器可能在某些情况下不按顺序执行指令。可以以不同于程序指定的顺序在寄存器，处理器高速缓存和主存储器之间移动数据。</p>
+<p>例如，如果一个线程写入字段a然后写入字段b，并且b的值不依赖于a的值，则编译器可以自由地重新排序这些操作，并且缓存可以自由地将b在a之前刷新到主内存。有许多潜在的重新排序源，例如编译器，JIT和缓存。</p>
+<p>编译器，运行时和硬件应该合谋创建as-if-serial语义的假象，这意味着在单线程程序中，程序不应该能够观察重新排序的影响。然而，重新排序可以在不同步的多线程程序中发挥作用，其中一个线程能够观察其他线程的影响，并且可以检测到变量的访问以不同的顺序对其他线程可见，而不是在程序中执行或指定的。</p>
+<p>大多数时候，一个线程不关心另一个线程在做什么。但如果是这样，那就是同步的原因。</p>
 
       
     </div>
 
+    
+
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，更多深度分析、实践代码，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/alipay.jpeg" alt="王召辉 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/wechatpay.jpeg" alt="王召辉 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java-memeory-model/" rel="tag"># java memeory model</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/09/15/java-memory-model/" rel="next" title="Java内存模型">
+                <i class="fa fa-chevron-left"></i> Java内存模型
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/10/22/amqp-0-9-1-model-explained/" rel="prev" title="AMQP 0-9-1模型解释">
+                AMQP 0-9-1模型解释 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+  </div>
 
 
           </div>
           
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
 
         </div>
         
@@ -467,8 +670,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -654,6 +866,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是内存模型"><span class="nav-number">1.</span> <span class="nav-text">什么是内存模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#其他语言，比如C-，有内存模型吗？"><span class="nav-number">2.</span> <span class="nav-text">其他语言，比如C ++，有内存模型吗？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是JSR-133？"><span class="nav-number">3.</span> <span class="nav-text">什么是JSR 133？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#重排序是什么意思？"><span class="nav-number">4.</span> <span class="nav-text">重排序是什么意思？</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -810,6 +1038,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.1"></script>
+
+
 
   
 
